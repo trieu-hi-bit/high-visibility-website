@@ -1371,6 +1371,12 @@
             overflow: hidden;
         }
 
+        @media (min-width: 1024px) {
+            .objection-card-full {
+                grid-column: 1 / -1;
+            }
+        }
+
         .objection-card::before {
             content: '';
             position: absolute;
@@ -2702,7 +2708,7 @@
                     <p class="objection-answer">Wir arbeiten nur zusammen, wenn dein ICP klar definiert ist und du bereit bist, die Strategie umzusetzen. <strong>Keine leeren Versprechen</strong> - aber wenn du mitmachst, siehst du Ergebnisse. Positionierung + Konsistenz = Sichtbarkeit.</p>
                 </div>
 
-                <div class="objection-card reveal reveal-delay-7">
+                <div class="objection-card objection-card-full reveal reveal-delay-7">
                     <div class="objection-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
