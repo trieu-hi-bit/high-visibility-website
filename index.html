@@ -1744,18 +1744,18 @@
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding-top: 2rem;
-                gap: 2rem;
+                padding-top: 0;
+                gap: 1.5rem;
             }
 
             .hero-image {
                 order: -1;
-                max-width: 300px;
+                max-width: 250px;
                 margin: 0 auto;
             }
 
             .hero-image-wrapper img {
-                max-height: 300px;
+                max-height: 250px;
             }
 
             .hero-image-bg-circle {
@@ -1990,14 +1990,11 @@
            SMOOTH SCROLL INDICATOR
            ============================================ */
         .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
+            margin-top: 2rem;
             opacity: 0;
             animation: fadeUp 0.8s var(--ease-out) 1.2s forwards;
         }
@@ -2084,6 +2081,10 @@
                     </a>
                     <a href="#philosophy" class="btn-secondary">Mehr erfahren</a>
                 </div>
+                <div class="scroll-indicator">
+                    <span>Scroll</span>
+                    <div class="scroll-line"></div>
+                </div>
             </div>
             <div class="hero-image">
                 <div class="hero-image-wrapper">
@@ -2093,10 +2094,6 @@
                     <div class="hero-image-dot"></div>
                 </div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
         </div>
     </section>
 
