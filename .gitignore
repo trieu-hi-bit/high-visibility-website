@@ -5,6 +5,8 @@
 
 # Claude
 .claude/
+CLAUDE.md
+claude.md
 
 # Temporary files
 *.tmp
