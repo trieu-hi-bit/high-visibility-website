@@ -2006,13 +2006,19 @@
            SMOOTH SCROLL INDICATOR
            ============================================ */
         .scroll-indicator {
-            display: none;
+            display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
             margin-top: 2rem;
             opacity: 0;
             animation: fadeUp 0.8s var(--ease-out) 1.2s forwards;
+        }
+
+        @media (min-width: 769px) {
+            .scroll-indicator {
+                display: none;
+            }
         }
 
         .scroll-indicator span {
