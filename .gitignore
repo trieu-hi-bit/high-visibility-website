@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude
+.claude/
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Deployment folder (temporary)
+deploy/
+
+# Documents and unused files
+*.docx
+*.csv
+Bildschirmfoto*.png
+Post*.png
+IMG_0977.jpg
+IMG_0983.JPG
+IMG_8363.JPG
+about-cutout.png
+about-photo.jpg
+about-photo-v2.jpg
+Hi's Ultra Business (1).docx
+Posts-Team Posts.csv

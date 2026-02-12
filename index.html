@@ -1,0 +1,2983 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HI.GH Visibility -LinkedIn Content & Positionierung</title>
+    <meta name="description" content="LinkedIn Content-Strategie & Personal Branding für B2B-Berater und Coaches. Authentischer Content, der nach dir klingt -nicht nach Agentur.">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           DESIGN SYSTEM -LIGHT MODE
+           ============================================ */
+        :root {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #FAF7F2;
+            --bg-tertiary: #F5F0E8;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --text-muted: #8A8A8A;
+            --gold: #EDA436;
+            --gold-dark: #D4922E;
+            --gold-light: #F5C97A;
+            --gold-subtle: rgba(237, 164, 54, 0.08);
+            --gold-glow: rgba(237, 164, 54, 0.12);
+            --border-subtle: rgba(0, 0, 0, 0.06);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08);
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: #FFFFFF;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid rgba(237, 164, 54, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06), 0 0 1px rgba(237, 164, 54, 0.2);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: width 0.4s var(--ease-out);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase;
+            padding: 0.65rem 1.5rem;
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold-dark) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: #FFFFFF !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* Mobile menu */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 3rem;
+            background: var(--bg-primary);
+        }
+
+        .hero-bg-gradient {
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .hero-bg-gradient-2 {
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(237, 164, 54, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            padding-right: 2rem;
+        }
+
+        .hero-logo-large {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-out) 0.2s forwards;
+        }
+
+        .hero-logo-large img {
+            height: 120px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
+        }
+
+        .hero-headline em {
+            font-style: italic;
+            color: var(--gold-dark);
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s var(--ease-out) 0.7s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s var(--ease-out) 0.9s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.2rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover::after {
+            opacity: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(237, 164, 54, 0.4), 0 0 80px rgba(237, 164, 54, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1);
+            box-shadow: 0 4px 15px rgba(237, 164, 54, 0.25);
+        }
+
+        .btn-primary svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.5s var(--ease-out);
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(6px) scale(1.1);
+            animation: arrowBounce 0.6s ease-in-out;
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(6px) scale(1.1); }
+            50% { transform: translateX(10px) scale(1.1); }
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            bottom: 0.8rem;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--text-primary);
+            transition: width 0.3s var(--ease-out);
+        }
+
+        .btn-secondary:hover {
+            color: var(--text-primary);
+            transform: translateX(3px);
+        }
+
+        .btn-secondary:hover::after {
+            width: calc(100% - 3rem);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1s var(--ease-out) 0.6s forwards;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 450px;
+            height: 560px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom center;
+            transition: transform 0.5s ease;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 98%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 98%);
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: scale(1.03) translateY(-5px);
+        }
+
+        .hero-image-wrapper:hover .hero-image-bg-circle {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .hero-image-bg-circle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px;
+            height: 380px;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            z-index: 1;
+            transition: transform 0.6s var(--ease-out);
+        }
+
+        .hero-image-accent {
+            position: absolute;
+            bottom: 30px;
+            right: -10px;
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-image-dot {
+            position: absolute;
+            top: 60px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            opacity: 0.08;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* ============================================
+           SECTION STYLING
+           ============================================ */
+        section {
+            padding: 8rem 3rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--gold-dark);
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        /* ============================================
+           MARQUEE / TICKER
+           ============================================ */
+        .ticker {
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--bg-primary);
+        }
+
+        .ticker-track {
+            display: flex;
+            animation: ticker 25s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 0 2rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .ticker-item .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============================================
+           ABOUT / ÜBER MICH
+           ============================================ */
+        .about {
+            background: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-main {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            object-position: center 35%;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image-bg {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .about-image-overlay {
+            position: absolute;
+            bottom: 2rem;
+            right: -2rem;
+            background: var(--bg-primary);
+            padding: 1.5rem 2rem;
+            border-left: 2px solid var(--gold);
+            box-shadow: var(--shadow-md);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .about-image-overlay p {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .about-text {
+            padding: 1rem 0;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--gold-dark);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================
+           PHILOSOPHY / ANSATZ
+           ============================================ */
+        .philosophy {
+            background: var(--bg-primary);
+        }
+
+        .philosophy-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .philosophy-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .philosophy-card {
+            padding: 2.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            transition: all 0.5s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease-out);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .philosophy-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .philosophy-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .philosophy-card:hover::after {
+            opacity: 1;
+        }
+
+        .philosophy-card:hover {
+            border-color: rgba(237, 164, 54, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1), 0 0 30px rgba(237, 164, 54, 0.1);
+        }
+
+        .philosophy-card:hover .philosophy-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .philosophy-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--gold-dark);
+            transition: transform 0.5s var(--ease-out);
+        }
+
+
+        .philosophy-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .philosophy-card p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           PROCESS / SO FUNKTIONIERT'S
+           ============================================ */
+        .process {
+            background: var(--bg-secondary);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+            margin-top: 4rem;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
+        }
+
+        .process-step:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0.6;
+            padding-top: 0.2rem;
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .process-visual {
+            position: sticky;
+            top: 120px;
+        }
+
+        .process-quote {
+            background: var(--bg-primary);
+            padding: 3rem;
+            border-left: 2px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .process-quote blockquote {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .process-quote blockquote em {
+            color: var(--gold-dark);
+            font-style: italic;
+        }
+
+        .process-quote cite {
+            font-family: var(--font-sans);
+            font-style: normal;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gold-dark);
+            letter-spacing: 0.05em;
+        }
+
+        .process-image {
+            margin-top: 2rem;
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ============================================
+           RESULTS / ERGEBNISSE
+           ============================================ */
+        .results {
+            background: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .results-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .result-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            border-radius: 8px;
+            transition: all 0.5s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold-subtle), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .result-card:hover::before {
+            opacity: 1;
+        }
+
+        .result-card:hover {
+            border-color: rgba(237, 164, 54, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .result-card:hover .result-arrow {
+            transform: scale(1.2);
+        }
+
+        .result-arrow {
+            display: flex;
+            align-items: center;
+            padding-top: 1.5rem;
+            color: var(--gold);
+            transition: transform 0.5s var(--ease-out);
+        }
+
+        .result-before-after {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: start;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .result-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+
+        .result-tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: var(--gold-subtle);
+            color: var(--gold-dark);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            border-radius: 50px;
+        }
+
+        /* ============================================
+           CONTENT EXAMPLE / PROOF
+           ============================================ */
+        .content-example {
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .content-example-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .content-example-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .example-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+            position: relative;
+        }
+
+
+        .example-post {
+            background: var(--bg-secondary);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            z-index: 2;
+        }
+
+        .example-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 12px 12px 0 0;
+        }
+
+        .highlight-text {
+            position: relative;
+            display: inline-block;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gold-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gold-dark);
+        }
+
+        .post-meta h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0 0 0.25rem 0;
+            color: var(--text-primary);
+        }
+
+        .post-meta p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .post-content {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content p {
+            margin: 0 0 1rem 0;
+        }
+
+        .post-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .post-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--gold-dark);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .example-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--bg-primary);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold-dark);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .example-cta-button:hover {
+            background: var(--gold);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 164, 54, 0.3);
+        }
+
+        .example-cta-button svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .example-cta-button:hover svg {
+            transform: translateX(4px);
+        }
+
+        .example-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .breakdown-item {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .breakdown-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breakdown-item .icon {
+            color: var(--gold);
+        }
+
+        .breakdown-item p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .example-result {
+            background: var(--gold-subtle);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .example-result p {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           BIG QUOTE
+           ============================================ */
+        .big-quote {
+            padding: 10rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .big-quote-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-serif);
+            font-size: 25vw;
+            color: rgba(237, 164, 54, 0.04);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .big-quote-content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .big-quote-content blockquote {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .big-quote-content blockquote em {
+            color: var(--gold-dark);
+            font-style: italic;
+        }
+
+        .big-quote-content cite {
+            font-family: var(--font-sans);
+            font-style: normal;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        /* ============================================
+           FOR YOU / FÜR WEN
+           ============================================ */
+        .for-you {
+            background: var(--bg-primary);
+        }
+
+        .for-you-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            margin-top: 3rem;
+        }
+
+        .for-you-list {
+            list-style: none;
+        }
+
+        .for-you-list li {
+            display: flex;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .for-you-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: var(--gold-dark);
+            margin-top: 0.2rem;
+        }
+
+        .not-for-you {
+            opacity: 0.5;
+        }
+
+        .not-for-you .check-icon {
+            color: var(--text-muted);
+        }
+
+        .for-you-heading {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .for-you-heading .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .for-you-heading .indicator.yes {
+            background: var(--gold);
+        }
+
+        .for-you-heading .indicator.no {
+            background: var(--text-muted);
+        }
+
+        /* ============================================
+           FAQ
+           ============================================ */
+        /* Objections Section */
+        .objections {
+            background: var(--bg-primary);
+        }
+
+        .objections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .objection-card {
+            padding: 2.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            transition: all 0.5s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .objection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease-out);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .objection-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .objection-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .objection-card:hover::after {
+            opacity: 1;
+        }
+
+        .objection-card:hover {
+            border-color: rgba(237, 164, 54, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1), 0 0 30px rgba(237, 164, 54, 0.1);
+        }
+
+        .objection-card:hover .objection-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .objection-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--gold-dark);
+            transition: transform 0.5s var(--ease-out);
+        }
+
+        .objection-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .objection-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .objection-before {
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .objection-answer {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .objection-answer strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .objections-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .objection-card {
+                padding: 2rem;
+            }
+
+            .objection-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .objection-icon {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        .faq {
+            background: var(--bg-secondary);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .faq-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(237, 164, 54, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 2rem 2.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            user-select: none;
+            position: relative;
+        }
+
+        .faq-question h3 {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .faq-icon {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gold-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-icon svg {
+            width: 16px;
+            height: 16px;
+            color: var(--gold-dark);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            background: var(--gold);
+        }
+
+        .faq-item.active .faq-icon svg {
+            transform: rotate(180deg);
+            color: #FFFFFF;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 2.5rem 2rem 2.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .faq-answer-content p {
+            margin: 0 0 1rem 0;
+        }
+
+        .faq-answer-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           CTA / BOOKING COMBINED SECTION
+           ============================================ */
+        .cta-booking-combined {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 10rem 3rem 6rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-gradient {
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%);
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-booking-combined .section-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-booking-combined .section-desc {
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Scroll behavior for booking button */
+        .cta-buttons a[href="#booking-calendar"] {
+            scroll-behavior: smooth;
+        }
+
+        /* ============================================
+           CALENDLY SECTION
+           ============================================ */
+        .calendly-section {
+            background: var(--bg-secondary);
+        }
+
+        .calendly-embed-container {
+            max-width: 900px;
+            margin: 3rem auto 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendly-bottom-section {
+            background: var(--bg-primary);
+            padding: 6rem 0;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: #F5F1ED;
+            padding: 4rem 3rem;
+            color: var(--text-primary);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-logo img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 6rem;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                order: -1;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .hero-image-wrapper img {
+                max-height: 300px;
+            }
+
+            .hero-image-bg-circle {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero-text {
+                padding-right: 0;
+            }
+
+            .hero-logo-large img {
+                height: 80px;
+            }
+
+            .hero-logo-large {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-sub {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image-overlay {
+                right: 0;
+            }
+
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .process-visual {
+                position: static;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .for-you-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .objections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .example-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--bg-primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                color: var(--text-primary);
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 0 1.5rem;
+            }
+
+            .hero-headline {
+                font-size: 2.2rem;
+            }
+
+            .hero-label {
+                justify-content: center;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .big-quote {
+                padding: 6rem 1.5rem;
+            }
+
+            .cta {
+                padding: 6rem 1.5rem;
+            }
+
+            .faq-question {
+                padding: 1.5rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+
+            .faq-answer-content {
+                padding: 0 1.5rem 1.5rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .example-post {
+                padding: 1.5rem;
+            }
+
+            .post-content {
+                font-size: 0.9rem;
+            }
+
+            .post-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-item .number {
+                font-size: 1.5rem;
+            }
+
+            .breakdown-item {
+                padding: 1.25rem;
+            }
+
+            .breakdown-item h4 {
+                font-size: 0.95rem;
+            }
+
+            .breakdown-item p {
+                font-size: 0.85rem;
+            }
+
+            .example-result {
+                padding: 1.5rem;
+            }
+
+            .example-result p {
+                font-size: 1.05rem;
+            }
+
+            .example-cta-button {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .result-before-after {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .result-arrow {
+                transform: rotate(90deg);
+                justify-self: center;
+                padding-top: 0;
+            }
+        }
+
+        /* ============================================
+           SMOOTH SCROLL INDICATOR
+           ============================================ */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-out) 1.2s forwards;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { top: -100%; }
+            50% { top: 100%; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVIGATION
+         ============================================ -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <img src="logo.png" alt="HI.GH Visibility">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Über mich</a></li>
+            <li><a href="#philosophy">Ansatz</a></li>
+            <li><a href="#process">So funktioniert's</a></li>
+            <li><a href="#results">Ergebnisse</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#booking" class="nav-cta">Termin buchen</a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO
+         ============================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-bg-gradient-2"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-label">LinkedIn Content & Positionierung</div>
+                <h1 class="hero-headline">
+                    Content, der nach <em>dir</em> klingt.<br>
+                    Nicht nach Agentur.
+                </h1>
+                <p class="hero-sub">
+                    Ich helfe B2B-Beratern & Coaches,<br>
+                    nicht nur sichtbar zu werden - sondern für ihr ICP sichtbar zu werden.<br>
+                    Positionierung, die klar macht, wer du bist. Content, der Anfragen bringt.<br>
+                    Keine Templates. Kein ChatGPT. Nur du.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">
+                        Erstgespräch vereinbaren
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#philosophy" class="btn-secondary">Mehr erfahren</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="hero-cutout.png" alt="Trieu Hi Au -HI.GH Visibility">
+                    <div class="hero-image-bg-circle"></div>
+                    <div class="hero-image-accent"></div>
+                    <div class="hero-image-dot"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TICKER
+         ============================================ -->
+    <div class="ticker">
+        <div class="ticker-track">
+            <div class="ticker-item"><span class="dot"></span> Positionierung</div>
+            <div class="ticker-item"><span class="dot"></span> LinkedIn Content</div>
+            <div class="ticker-item"><span class="dot"></span> Personal Branding</div>
+            <div class="ticker-item"><span class="dot"></span> B2B Leadgenerierung</div>
+            <div class="ticker-item"><span class="dot"></span> Content Strategie</div>
+            <div class="ticker-item"><span class="dot"></span> Authentizität</div>
+            <div class="ticker-item"><span class="dot"></span> ICP Klarheit</div>
+            <div class="ticker-item"><span class="dot"></span> Positionierung</div>
+            <div class="ticker-item"><span class="dot"></span> LinkedIn Content</div>
+            <div class="ticker-item"><span class="dot"></span> Personal Branding</div>
+            <div class="ticker-item"><span class="dot"></span> B2B Leadgenerierung</div>
+            <div class="ticker-item"><span class="dot"></span> Content Strategie</div>
+            <div class="ticker-item"><span class="dot"></span> Authentizität</div>
+            <div class="ticker-item"><span class="dot"></span> ICP Klarheit</div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         ABOUT / ÜBER MICH
+         ============================================ -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <div class="about-image-bg"></div>
+                    <img src="about-photo-v4.jpg" alt="Trieu Hi Au" class="about-image-main">
+                    <div class="about-image-overlay">
+                        <p>Menschen kaufen von Menschen -<br>nicht von Logos oder ChatGPT.</p>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <div class="section-label reveal">Über mich</div>
+                    <h2 class="section-title reveal reveal-delay-1">
+                        Ich bin Hi.<br>
+                        Und ich <em>höre</em> zu.
+                    </h2>
+                    <p class="reveal reveal-delay-2">
+                        Kindheitspädagogik studiert. Empathie war schon immer mein Ding. Die richtigen Fragen stellen - das ist, was ich am besten kann. Heute nutze ich genau das, um Content aus dir rauszuholen, der sich echt anfühlt.
+                    </p>
+                    <p class="reveal reveal-delay-2">
+                        Aber bevor wir über Content sprechen: Positionierung. Ohne kristallklare Positionierung verpufft jeder Post. Ich helfe dir zu definieren, für wen du da bist, was dich einzigartig macht und warum deine Traumkunden genau mit DIR arbeiten sollten. Das ist das Fundament.
+                    </p>
+                    <p class="reveal reveal-delay-3">
+                        Ich schreibe keinen Content für dich. Ich extrahiere ihn aus dir. In echten Gesprächen. Alle zwei Wochen. 30 Minuten. Das reicht.
+                    </p>
+                    <p class="reveal reveal-delay-3">
+                        Keine Templates. Keine kopierten Hooks. Content, der nach dir klingt - und die richtigen Menschen anspricht. Nicht alle. Nur deine.
+                    </p>
+                    <p class="reveal reveal-delay-4" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-secondary); border-left: 3px solid var(--gold); border-radius: 4px;">
+                        <strong>Was ich NICHT kann:</strong> Dich über Nacht berühmt machen. Viral gehen lassen. Oder dir garantieren, dass du in 30 Tagen 50 Kunden hast.<br><br>
+                        <strong>Was ich KANN:</strong> Dir helfen, klar zu positionieren. Content zu erstellen, der authentisch ist. Und die richtigen Menschen auf dich aufmerksam zu machen.
+                    </p>
+                    <div class="about-stats reveal reveal-delay-5">
+                        <div>
+                            <div class="stat-number">30</div>
+                            <div class="stat-label">Minuten alle 2 Wochen</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Kunden betreut</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Deine Stimme</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PHILOSOPHY / ANSATZ
+         ============================================ -->
+    <section class="philosophy" id="philosophy">
+        <div class="section-container">
+            <div class="philosophy-header">
+                <div class="section-label reveal">Warum die meisten auf LinkedIn scheitern</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Du postest regelmäßig.<br>
+                    Aber die <em>richtigen Kunden</em> melden sich nicht.
+                </h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Das Problem? Dein Content spricht alle an - und dadurch niemanden wirklich. Ich helfe dir, kristallklar zu positionieren: Für wen du da bist. Was dein Ansatz ist. Warum Kunden genau mit DIR arbeiten sollten. Von Content-Strategie über professionelle Carousel-Designs bis hin zu gezielten Connection-Listen - alles darauf ausgerichtet, die richtigen Menschen zu erreichen.
+                </p>
+            </div>
+
+            <div class="philosophy-grid">
+                <div class="philosophy-card reveal">
+                    <div class="philosophy-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2a3 3 0 0 0-3 3v4a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+                            <line x1="12" y1="18" x2="12" y2="22"/>
+                        </svg>
+                    </div>
+                    <h3>ICP-Klarheit vor Content</h3>
+                    <p>Bevor wir auch nur einen Post schreiben: Wer ist dein idealer Kunde? Welche Probleme hat er? Warum sollte er dich wählen? Ohne klare Positionierung verpufft jeder Post.</p>
+                </div>
+
+                <div class="philosophy-card reveal reveal-delay-1">
+                    <div class="philosophy-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <h3>Qualität vor Quantität</h3>
+                    <p>Ein Kunde, der genau deine Lösung sucht, ist mehr wert als 1.000 Follower, die nie kaufen werden. Ich optimiere auf qualifizierte Anfragen - nicht auf Likes oder Reichweite.</p>
+                </div>
+
+                <div class="philosophy-card reveal reveal-delay-2">
+                    <div class="philosophy-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h3>Deine Stimme, nicht ChatGPT</h3>
+                    <p>Deine Kunden kaufen von DIR - nicht von generischen Posts. Ich extrahiere deine Expertise in echten Gesprächen. Das Ergebnis? Content, der nicht nur klingt wie du sprichst, sondern auch genau deine ICP anspricht.</p>
+                </div>
+            </div>
+
+            <div class="reveal reveal-delay-3" style="text-align: center; margin-top: 3rem;">
+                <a href="#booking-calendar" class="btn-primary" style="display: inline-flex;">
+                    Jetzt Erstgespräch buchen
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PROCESS / SO FUNKTIONIERT'S
+         ============================================ -->
+    <section class="process" id="process">
+        <div class="section-container">
+            <div class="section-label reveal">So funktioniert's</div>
+            <h2 class="section-title reveal reveal-delay-1">
+                Du sprichst <em>30 Minuten</em> über deine Arbeit.<br>
+                Ich mache daraus LinkedIn-Content,<br>
+                der Anfragen bringt.
+            </h2>
+
+            <div class="process-grid">
+                <div class="process-steps">
+                    <div class="process-step reveal">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h4>Positionierungs-Workshop</h4>
+                            <p>Wir definieren gemeinsam: Wer ist dein ICP? Welche Pain Points hat er? Was macht deinen Ansatz einzigartig? Diese Klarheit ist die Basis für alles.</p>
+                        </div>
+                    </div>
+                    <div class="process-step reveal reveal-delay-1">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h4>30-Min-Calls alle 2 Wochen</h4>
+                            <p>Du erzählst von aktuellen Kundenprojekten, Learnings und Ergebnissen. Ich stelle die richtigen Fragen. Kein Druck, keine Vorbereitung - wir reden einfach wie Freunde.</p>
+                        </div>
+                    </div>
+                    <div class="process-step reveal reveal-delay-2">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h4>Content-Strategie & Umsetzung</h4>
+                            <p>Ich verwandle deine Insights in Posts, die deine ICP ansprechen. Mit klarer Struktur: Problem → Lösung → Call-to-Action. So wie du denkst, so klingt der Content.</p>
+                            <p style="margin-top: 0.75rem; opacity: 0.9;">Plus: Professionelle Carousel-Designs auf Figma, KI-unterstützte Content-Optimierung & Connection-Listen mit relevanten Accounts deiner Zielgruppe.</p>
+                        </div>
+                    </div>
+                    <div class="process-step reveal reveal-delay-3">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h4>Ergebnis: Qualifizierte Anfragen</h4>
+                            <p>Anfragen von Kunden, die dein Profil verstanden haben. Die wissen, was du machst. Die bereit sind zu investieren. Nur noch die Richtigen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-visual reveal">
+                    <div class="process-quote">
+                        <blockquote>
+                            "Die besten <em>Kunden</em> kommen nicht, weil du <em>viral</em> gehst. Sie kommen, weil sie sich in deinem <em>Content</em> wiedererkennen."
+                        </blockquote>
+                        <cite>- Hi.gh Visibility</cite>
+                    </div>
+                    <img src="IMG_0976.jpg" alt="Arbeitsweise" class="process-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         RESULTS / ERGEBNISSE
+         ============================================ -->
+    <section class="results" id="results">
+        <div class="section-container">
+            <div class="results-header">
+                <div class="section-label reveal">Ergebnisse meiner Kunden</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Von „interessiert mich" Likes<br>
+                    zu <em>„Können wir sprechen?"</em> DMs.
+                </h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Das Ziel ist nicht mehr Sichtbarkeit. Sondern die richtige Sichtbarkeit - bei den Menschen, die deine Lösung wirklich brauchen.
+                </p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card reveal">
+                    <div class="result-before-after">
+                        <div>
+                            <div class="result-label">Vorher</div>
+                            <div class="result-text">Regelmäßig gepostet, gutes Engagement - aber keine planbaren Anfragen</div>
+                        </div>
+                        <div class="result-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                        <div>
+                            <div class="result-label">Nachher</div>
+                            <div class="result-text">3-4 qualifizierte Anfragen pro Woche, Content der regelmäßig rausgeht</div>
+                        </div>
+                    </div>
+                    <div class="result-tag">B2B Berater</div>
+                </div>
+
+                <div class="result-card reveal reveal-delay-1">
+                    <div class="result-before-after">
+                        <div>
+                            <div class="result-label">Vorher</div>
+                            <div class="result-text">Content klang generisch, wie von einer Agentur geschrieben</div>
+                        </div>
+                        <div class="result-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                        <div>
+                            <div class="result-label">Nachher</div>
+                            <div class="result-text">ICPs sagen: „Das hat sich angefühlt, als wäre es für mich geschrieben."</div>
+                        </div>
+                    </div>
+                    <div class="result-tag">Coach</div>
+                </div>
+
+                <div class="result-card reveal reveal-delay-2">
+                    <div class="result-before-after">
+                        <div>
+                            <div class="result-label">Vorher</div>
+                            <div class="result-text">Kontroverse Hooks kopiert - falsche Kunden angezogen</div>
+                        </div>
+                        <div class="result-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                        <div>
+                            <div class="result-label">Nachher</div>
+                            <div class="result-text">Authentischer Content - Kalender voll mit relevanten Kundengesprächen</div>
+                        </div>
+                    </div>
+                    <div class="result-tag">Unternehmerin</div>
+                </div>
+
+                <div class="result-card reveal reveal-delay-3">
+                    <div class="result-before-after">
+                        <div>
+                            <div class="result-label">Vorher</div>
+                            <div class="result-text">Keine Zeit für LinkedIn zwischen Kundenprojekten und Calls</div>
+                        </div>
+                        <div class="result-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                        <div>
+                            <div class="result-label">Nachher</div>
+                            <div class="result-text">30 Min alle 2 Wochen -professionelle LinkedIn-Präsenz ohne Zeitstress</div>
+                        </div>
+                    </div>
+                    <div class="result-tag">Solo-Unternehmer</div>
+                </div>
+            </div>
+
+            <div class="reveal reveal-delay-4" style="text-align: center; margin-top: 3rem;">
+                <a href="#booking-calendar" class="btn-primary" style="display: inline-flex;">
+                    Jetzt Erstgespräch buchen
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTENT EXAMPLE / PROOF
+         ============================================ -->
+    <section class="content-example">
+        <div class="section-container">
+            <div class="content-example-header">
+                <div class="section-label reveal">Practice what I preach</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Dieser Post hat mir<br>
+                    <em>276 Profilbesuche</em> gebracht.
+                </h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Nicht durch virale Reichweite. Sondern weil er genau die richtigen Menschen angesprochen hat. Hier ist der Breakdown.
+                </p>
+            </div>
+
+            <div class="example-container">
+                <div class="example-post reveal">
+                    <div class="post-header">
+                        <div class="post-avatar">H</div>
+                        <div class="post-meta">
+                            <h4>Trieu Hi Au</h4>
+                            <p>LinkedIn Content & Positionierung</p>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p id="hook-text"><strong>"Ich poste regelmäßig. Aber niemand schreibt mir."</strong></p>
+                        <p>Das höre ich jede Woche.</p>
+                        <p>3-4 Posts pro Woche.<br>
+                        Seit Monaten.<br>
+                        1-10 Likes. Maximal.<br>
+                        Null Anfragen.</p>
+                        <p id="problems-text"><strong>Problem 1:</strong> Zu wenig relevante Kontakte.<br>
+                        Unter circa 500 Connections... davon vielleicht 50-80, die ihre Zielgruppe sind.</p>
+                        <p><strong>Problem 2:</strong> Zielgruppe zu breit.<br>
+                        "Mittelständische Unternehmen." Das sind Hunderttausende.</p>
+                        <p><strong>Problem 3:</strong> Content zu technisch.<br>
+                        Aber ihr ICP denkt nicht in "API-Schnittstellen" - sondern in "Wie spare ich Zeit?"</p>
+                        <p><strong>Problem 4:</strong> Headline sagt nichts.<br>
+                        "Ich helfe Unternehmen mit X." Klingt wie 10.000 andere.</p>
+                        <p id="story-text">Erst als ich aufgehört hab, für alle da zu sein, kamen die Richtigen.</p>
+                        <p id="cta-text"><strong>Postest du für dein Ego oder für deinen ICP?</strong></p>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">
+                            <div class="number">8.5k</div>
+                            <div class="label">Impressions</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">276</div>
+                            <div class="label">Profilbesuche</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">154</div>
+                            <div class="label">Reactions</div>
+                        </div>
+                    </div>
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7424374834882756608/" target="_blank" class="example-cta-button">
+                        Post auf LinkedIn ansehen
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </a>
+                </div>
+
+
+                <div class="example-breakdown">
+                    <div class="breakdown-item reveal reveal-delay-1" data-target="hook">
+                        <h4>
+                            <span class="icon">✓</span>
+                            Hook trifft den Pain Point
+                        </h4>
+                        <p>"Ich poste regelmäßig. Aber niemand schreibt mir." - Mein ICP denkt sofort: "Das bin ICH!"</p>
+                    </div>
+
+                    <div class="breakdown-item reveal reveal-delay-2" data-target="problems">
+                        <h4>
+                            <span class="icon">✓</span>
+                            4 konkrete Probleme
+                        </h4>
+                        <p>Nicht theoretisch. Sondern exakt die Fehler, die meine Zielgruppe macht: Zu wenig Kontakte, zu breite Positionierung, zu technischer Content, generische Headline.</p>
+                    </div>
+
+                    <div class="breakdown-item reveal reveal-delay-3" data-target="story">
+                        <h4>
+                            <span class="icon">✓</span>
+                            Persönliche Story
+                        </h4>
+                        <p>"Ich hab früher denselben Fehler gemacht" - Zeigt Authentizität. Keine Theorie, sondern eigene Erfahrung.</p>
+                    </div>
+
+                    <div class="breakdown-item reveal reveal-delay-4" data-target="cta">
+                        <h4>
+                            <span class="icon">✓</span>
+                            CTA macht nachdenklich
+                        </h4>
+                        <p>"Postest du für dein Ego oder für deinen ICP?" - Keine harte Verkaufsaufforderung. Sondern eine Frage, die im Kopf bleibt.</p>
+                    </div>
+
+                    <div class="example-result reveal reveal-delay-5">
+                        <p>Das Ergebnis? 276 Menschen haben sich mein Profil angeschaut. Das sind potenzielle Kunden, die verstehen wollen: Kann sie mir helfen?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BIG QUOTE
+         ============================================ -->
+    <section class="big-quote">
+        <div class="big-quote-bg">"</div>
+        <div class="big-quote-content reveal">
+            <blockquote>
+                Deine <em>idealen Kunden</em> suchen schon nach jemandem wie dir. Sie scrollen gerade durch <em>LinkedIn</em>. Die Frage ist: Erkennen sie sich in deinem <em>Content</em> wieder?
+            </blockquote>
+            <cite>- Hi.gh Visibility</cite>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOR YOU / FÜR WEN
+         ============================================ -->
+    <section class="for-you" id="for-you">
+        <div class="section-container">
+            <div class="section-label reveal">Bist du mein ICP?</div>
+            <h2 class="section-title reveal reveal-delay-1">
+                Das hier ist für dich, wenn...<br>
+                <em>(und ehrlich: nur dann)</em>
+            </h2>
+
+            <div class="for-you-grid">
+                <div>
+                    <div class="for-you-heading reveal">
+                        <span class="indicator yes"></span>
+                        Das passt, wenn du…
+                    </div>
+                    <ul class="for-you-list">
+                        <li class="reveal">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            Du bist B2B-Berater, Coach oder Consultant mit Projektwerten ab 5.000€+
+                        </li>
+                        <li class="reveal reveal-delay-1">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            Du hast beweisbare Ergebnisse, aber LinkedIn bringt dir keine Kunden
+                        </li>
+                        <li class="reveal reveal-delay-2">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            Du willst keine viralen Posts, sondern qualifizierte Gespräche mit deinem ICP
+                        </li>
+                        <li class="reveal reveal-delay-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                            Du bist bereit, 30 Min alle 2 Wochen in deine LinkedIn-Präsenz zu investieren
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="not-for-you">
+                    <div class="for-you-heading reveal">
+                        <span class="indicator no"></span>
+                        Das passt nicht, wenn du…
+                    </div>
+                    <ul class="for-you-list">
+                        <li class="reveal">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Du suchst schnelle Reichweite und virale Tricks (das ist nicht mein Ansatz)
+                        </li>
+                        <li class="reveal reveal-delay-1">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Du willst billigen Fließband-Content (ich arbeite nur mit wenigen Kunden)
+                        </li>
+                        <li class="reveal reveal-delay-2">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Du weißt nicht, wer dein ICP ist (ohne Klarheit kann ich dir nicht helfen)
+                        </li>
+                        <li class="reveal reveal-delay-3">
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Du erwartest Ergebnisse in 2 Wochen (Positionierung braucht Zeit)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reveal reveal-delay-4" style="text-align: center; margin-top: 3rem;">
+                <a href="#booking-calendar" class="btn-primary" style="display: inline-flex;">
+                    Jetzt Erstgespräch buchen
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         Einwände / Objections
+         ============================================ -->
+    <section class="objections" id="objections">
+        <div class="section-container">
+            <div class="section-label reveal">Ehrliche Antworten</div>
+            <h2 class="section-title reveal reveal-delay-1">
+                Deine Zweifel.<br>
+                <em>Meine Antworten.</em>
+            </h2>
+
+            <div class="objections-grid">
+                <div class="objection-card reveal reveal-delay-1">
+                    <div class="objection-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>"Ich hab keine Zeit für LinkedIn"</h3>
+                    <p class="objection-before">Genau deshalb brauchst du eine Strategie.</p>
+                    <p class="objection-answer">Mit klarer Positionierung reichen <strong>2-3 Posts pro Woche</strong>. Kein tägliches Posten nötig. Qualität > Quantität. Ich zeige dir, wie du in 30 Min/Woche mehr erreichst als andere in 2 Stunden täglich.</p>
+                </div>
+
+                <div class="objection-card reveal reveal-delay-2">
+                    <div class="objection-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>"Ich kann doch selbst posten"</h3>
+                    <p class="objection-before">Klar kannst du. Die Frage ist: Postest du strategisch?</p>
+                    <p class="objection-answer">Der Unterschied: Du lernst nicht nur WAS du postest, sondern <strong>WIE du deine Zielgruppe magnetisch anziehst</strong>. Content ist nur ein Teil. Positionierung, Hook-Struktur, ICP-Targeting - das macht den Unterschied zwischen 10 und 150 Likes.</p>
+                </div>
+
+                <div class="objection-card reveal reveal-delay-3">
+                    <div class="objection-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>"Ist das nicht zu teuer?"</h3>
+                    <p class="objection-before">Was kostet dich ein verlorener Auftrag?</p>
+                    <p class="objection-answer">Ein einziger qualifizierter Lead über LinkedIn kann dein Investment um das 10-fache übersteigen. Du investierst nicht in Posts - du investierst in <strong>Sichtbarkeit bei deinem ICP</strong>. Das zahlt sich langfristig aus.</p>
+                </div>
+
+                <div class="objection-card reveal reveal-delay-4">
+                    <div class="objection-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>"LinkedIn funktioniert in meiner Branche nicht"</h3>
+                    <p class="objection-before">LinkedIn funktioniert überall - wenn die Strategie stimmt.</p>
+                    <p class="objection-answer">Ich arbeite mit B2B-Dienstleistern, Coaches, Beratern. Die Plattform ist egal - <strong>deine Positionierung ist entscheidend</strong>. Wenn du einen klar definierten ICP hast, findest du ihn auf LinkedIn.</p>
+                </div>
+
+                <div class="objection-card reveal reveal-delay-5">
+                    <div class="objection-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M18 20V10"/>
+                            <path d="M12 20V4"/>
+                            <path d="M6 20v-6"/>
+                        </svg>
+                    </div>
+                    <h3>"Ich will erst mal selbst ausprobieren"</h3>
+                    <p class="objection-before">Respekt. Aber sei ehrlich:</p>
+                    <p class="objection-answer">Wie lange postest du schon ohne Ergebnisse? <strong>6 Monate trial & error</strong> vs. 6 Wochen mit klarer Strategie. Deine Zeit ist wertvoll. Ich hab die Fehler schon gemacht - du musst sie nicht wiederholen.</p>
+                </div>
+
+                <div class="objection-card reveal reveal-delay-6">
+                    <div class="objection-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </div>
+                    <h3>"Was, wenn's bei mir nicht klappt?"</h3>
+                    <p class="objection-before">Berechtigte Sorge. Deshalb:</p>
+                    <p class="objection-answer">Wir arbeiten nur zusammen, wenn dein ICP klar definiert ist und du bereit bist, die Strategie umzusetzen. <strong>Keine leeren Versprechen</strong> - aber wenn du mitmachst, siehst du Ergebnisse. Positionierung + Konsistenz = Sichtbarkeit.</p>
+                </div>
+
+                <div class="objection-card reveal reveal-delay-7">
+                    <div class="objection-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>"Ich habe schon 3 LinkedIn-Agenturen ausprobiert. Warum sollte es bei dir anders sein?"</h3>
+                    <p class="objection-before">Vielleicht ist es das nicht. Ehrlich.</p>
+                    <p class="objection-answer">Aber der Unterschied: Ich bin keine Agentur mit 50 Kunden. Ich arbeite mit <strong>wenigen Menschen</strong>, denen ich wirklich helfen kann. Wenn ich denke, dass wir nicht zusammenpassen - sage ich das im Erstgespräch. Bevor du auch nur einen Euro zahlst.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FAQ
+         ============================================ -->
+    <section class="faq" id="faq">
+        <div class="section-container">
+            <div class="faq-header">
+                <div class="section-label reveal">Häufige Fragen</div>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Noch Fragen?<br>
+                    <em>Hier sind die Antworten.</em>
+                </h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Ich weiß, du hast Zweifel. Gut so. Hier beantworte ich die wichtigsten Fragen, bevor wir sprechen.
+                </p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Wie viel Zeit muss ich investieren?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>30 Minuten alle 2 Wochen.</strong> Das war's.</p>
+                            <p>In diesem Call sprechen wir über deine aktuellen Kundenprojekte, Learnings, Insights. Ich stelle die richtigen Fragen. Du musst nichts vorbereiten - einfach erzählen, wie im echten Kundengespräch.</p>
+                            <p>Den Rest übernehme ich: Content schreiben, Carousels designen, Posting-Plan erstellen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal reveal-delay-1">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Schreibst du die Posts oder muss ich das machen?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Ich schreibe sie.</strong> Aber nicht so, wie Agenturen das machen.</p>
+                            <p>Ich extrahiere deine Expertise aus unseren Gesprächen und formuliere sie in deinem Tonfall. Das Ergebnis liest sich, als hättest du es selbst geschrieben - weil die Gedanken von dir kommen.</p>
+                            <p>Du bekommst fertige Posts zur Freigabe. Wenn dir was nicht passt, ändern wir es. Bis es sich nach DIR anfühlt.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal reveal-delay-2">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Was kostet die Zusammenarbeit?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Das besprechen wir im Erstgespräch.</strong></p>
+                            <p>Ich höre mir erst deine Bottlenecks an und mache aufgrund dessen ein maßgeschneidertes Angebot. Manche brauchen nur Content. Andere den kompletten Positionierungs-Workshop + Content + Connection-Listen.</p>
+                            <p>Was ich dir sagen kann: Wenn du mit Projektwerten unter 5.000€ arbeitest, ist mein Service wahrscheinlich zu teuer für dich. Mein ICP sind B2B-Berater und Coaches mit höheren Ticketpreisen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal reveal-delay-3">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Wie lange dauert es, bis ich erste Ergebnisse sehe?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Erste Impressions und Profilbesuche nach 1-2 Wochen. Qualifizierte Anfragen nach 6-12 Wochen.</strong></p>
+                            <p>LinkedIn ist kein Performance-Marketing mit sofortigen Conversions. Es ist Vertrauensaufbau. Dein ICP muss dich mehrfach sehen, deine Expertise wahrnehmen, Vertrauen entwickeln.</p>
+                            <p>Wenn jemand dir "100 Leads in 14 Tagen" verspricht, lügt er. Oder er meint unqualifizierte Anfragen von Leuten, die eh nicht kaufen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal reveal-delay-4">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Arbeitest du auch mit Coaches/Beratern aus [Branche X]?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Ja, solange du einen klaren ICP hast.</strong></p>
+                            <p>Deine Branche ist weniger wichtig als deine Positionierung. Ob du Unternehmensberater, Leadership Coach, Recruiting-Experte oder Vertriebstrainer bist - wenn du weißt, für wen du da bist und welches Problem du löst, kann ich dir helfen.</p>
+                            <p>Ohne klaren ICP wird's schwierig. Dann müssten wir erst im Positionierungs-Workshop Klarheit schaffen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal reveal-delay-5">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3>Was passiert, wenn mir der Content nicht gefällt?</h3>
+                        <div class="faq-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>Dann ändern wir ihn. Einfach so.</strong></p>
+                            <p>Du hast das letzte Wort. Immer. Wenn dir ein Post nicht passt, sagst du Bescheid. Wir passen an, bis es sich richtig anfühlt.</p>
+                            <p>Ziel ist nicht, dass ich zufrieden bin. Sondern dass du dich in deinem Content wiedererkennst - und dein ICP sich angesprochen fühlt.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA / BOOKING SECTION
+         ============================================ -->
+    <section class="cta-booking-combined" id="contact">
+        <div class="cta-gradient"></div>
+        <div class="cta-content">
+            <div class="section-label reveal">Bereit für qualifizierte Anfragen?</div>
+            <h2 class="section-title reveal reveal-delay-1">
+                Lass uns ehrlich klären:<br>
+                Macht eine <em>Zusammenarbeit</em> Sinn?
+            </h2>
+            <p class="section-desc reveal reveal-delay-2">
+                Schreib mir auf LinkedIn. Kein Sales-Pitch. Wir schauen gemeinsam: Wo stehst du? Wer ist dein ICP? Und kann ich dir wirklich helfen, oder passt es einfach nicht? Ehrlichkeit first.
+            </p>
+            <div class="cta-buttons reveal reveal-delay-3">
+                <a href="https://www.linkedin.com/in/trieu-hi-au-39a808228/" target="_blank" class="btn-primary" style="display: inline-flex;">
+                    LinkedIn Profil besuchen
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Calendly Widget direkt in derselben Sektion -->
+        <div class="section-container" id="booking-calendar" style="padding-top: 4rem;">
+            <div class="calendly-embed-container reveal reveal-delay-4">
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget"
+                     data-url="https://calendly.com/trieu-hi-gethighvisibility/30min?primary_color=eda436"
+                     style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                <!-- Calendly inline widget end -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="HI.GH Visibility">
+                </div>
+                <div class="footer-copy">&copy; 2026 HI.GH Visibility. Alle Rechte vorbehalten.</div>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/trieu-hi-au-39a808228/" target="_blank">LinkedIn</a>
+                <a href="#booking-calendar">Termin buchen</a>
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            if (currentScroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const spans = navToggle.querySelectorAll('span');
+            if (navLinks.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+            } else {
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
+            }
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const spans = navToggle.querySelectorAll('span');
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
+            });
+        });
+
+        // Scroll reveal animation with stagger
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Subtle parallax effect for hero gradients
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.scrollY;
+                    const heroGradient = document.querySelector('.hero-bg-gradient');
+                    const heroGradient2 = document.querySelector('.hero-bg-gradient-2');
+
+                    if (heroGradient && scrolled < window.innerHeight) {
+                        heroGradient.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    }
+                    if (heroGradient2 && scrolled < window.innerHeight) {
+                        heroGradient2.style.transform = `translateY(${scrolled * 0.2}px)`;
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Add micro-interactions to cards
+        document.querySelectorAll('.philosophy-card, .result-card').forEach(card => {
+            card.addEventListener('mouseenter', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                this.style.setProperty('--mouse-x', `${x}px`);
+                this.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const wasActive = faqItem.classList.contains('active');
+
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Toggle current item
+            if (!wasActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Content Example Annotations - Draw connecting lines
+    </script>
+
+</body>
+</html>
