@@ -1914,8 +1914,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 2.5rem;
-                z-index: 10000;
+                gap: 2rem;
             }
 
             .nav-links.active {
@@ -1925,28 +1924,6 @@
             .nav-links a {
                 font-size: 1.2rem;
                 color: var(--text-primary);
-                padding: 0.75rem 1.5rem;
-                border-radius: 12px;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            .nav-links a:hover {
-                background: rgba(255, 255, 255, 0.05);
-                transform: scale(1.05);
-            }
-
-            .nav-links .nav-cta {
-                background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-                padding: 1rem 2rem;
-                border-radius: 12px;
-                font-weight: 600;
-                box-shadow: 0 4px 20px rgba(237, 164, 54, 0.3);
-            }
-
-            .nav-links .nav-cta:hover {
-                background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-                transform: scale(1.05);
-                box-shadow: 0 6px 30px rgba(237, 164, 54, 0.4);
             }
 
             .nav-toggle {
@@ -3120,12 +3097,10 @@
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-                document.body.style.overflow = 'hidden';
             } else {
                 spans[0].style.transform = '';
                 spans[1].style.opacity = '';
                 spans[2].style.transform = '';
-                document.body.style.overflow = '';
             }
         });
 
@@ -3137,7 +3112,6 @@
                 spans[0].style.transform = '';
                 spans[1].style.opacity = '';
                 spans[2].style.transform = '';
-                document.body.style.overflow = '';
             });
         });
 
@@ -3153,7 +3127,6 @@
                 spans[0].style.transform = '';
                 spans[1].style.opacity = '';
                 spans[2].style.transform = '';
-                document.body.style.overflow = '';
             }
 
             lastScrollPosition = currentScrollPosition;
