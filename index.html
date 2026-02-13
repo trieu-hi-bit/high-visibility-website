@@ -1904,6 +1904,7 @@
             }
 
             .nav-links {
+                display: none;
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -1914,15 +1915,10 @@
                 justify-content: center;
                 align-items: center;
                 gap: 2rem;
-                z-index: 10000;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease;
             }
 
             .nav-links.active {
-                opacity: 1;
-                pointer-events: all;
+                display: flex;
             }
 
             .nav-links a {
@@ -3098,33 +3094,19 @@
             navLinks.classList.toggle('active');
             const spans = navToggle.querySelectorAll('span');
             if (navLinks.classList.contains('active')) {
-                // Menu öffnen
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-                // Body Scroll blockieren
-                document.body.style.overflow = 'hidden';
             } else {
-                // Menu schließen
                 spans[0].style.transform = '';
                 spans[1].style.opacity = '';
                 spans[2].style.transform = '';
-                // Body Scroll wieder erlauben
-                document.body.style.overflow = '';
             }
         });
 
         // Close mobile menu on link click
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                // Menu schließen
-                navLinks.classList.remove('active');
-                const spans = navToggle.querySelectorAll('span');
-                spans[0].style.transform = '';
-                spans[1].style.opacity = '';
-                spans[2].style.transform = '';
-                // Body Scroll wieder erlauben
-                document.body.style.overflow = '';
                 navLinks.classList.remove('active');
                 const spans = navToggle.querySelectorAll('span');
                 spans[0].style.transform = '';
