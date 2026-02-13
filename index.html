@@ -3115,6 +3115,23 @@
             });
         });
 
+        // Close mobile menu on scroll
+        let lastScrollPosition = window.pageYOffset;
+        window.addEventListener('scroll', () => {
+            const currentScrollPosition = window.pageYOffset;
+
+            // Only close menu if user actually scrolled (not just smooth scroll from link click)
+            if (Math.abs(currentScrollPosition - lastScrollPosition) > 10 && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const spans = navToggle.querySelectorAll('span');
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
+            }
+
+            lastScrollPosition = currentScrollPosition;
+        });
+
         // Scroll reveal animation with stagger
         const observerOptions = {
             threshold: 0.1,
