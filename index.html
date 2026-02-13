@@ -1904,6 +1904,7 @@
             }
 
             .nav-links {
+                display: none;
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -1915,14 +1916,10 @@
                 align-items: center;
                 gap: 2.5rem;
                 z-index: 10000;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease;
             }
 
             .nav-links.active {
-                opacity: 1;
-                pointer-events: all;
+                display: flex;
             }
 
             .nav-links a {
