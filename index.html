@@ -1773,6 +1773,7 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
 
         /* ============================================
            RESPONSIVE
@@ -3074,16 +3075,23 @@
                         }
                     });
 
-                    // Track widget load
-                    const calendlyWidget = document.querySelector('.calendly-inline-widget');
-                    if (calendlyWidget) {
-                        const checkCalendlyLoaded = setInterval(() => {
-                            const iframe = calendlyWidget.querySelector('iframe');
-                            if (iframe) {
-                                trackEvent('calendly_widget_loaded');
-                                clearInterval(checkCalendlyLoaded);
-                            }
-                        }, 500);
+                    // Track widget load with error handling
+                    try {
+                        const calendlyWidget = document.querySelector('.calendly-inline-widget');
+                        if (calendlyWidget) {
+                            const checkCalendlyLoaded = setInterval(() => {
+                                const iframe = calendlyWidget.querySelector('iframe');
+                                if (iframe) {
+                                    trackEvent('calendly_widget_loaded');
+                                    clearInterval(checkCalendlyLoaded);
+                                }
+                            }, 500);
+
+                            // Clear interval after 30 seconds to prevent memory leak
+                            setTimeout(() => clearInterval(checkCalendlyLoaded), 30000);
+                        }
+                    } catch (error) {
+                        console.error('Calendly tracking error:', error);
                     }
                 </script>
             </div>
@@ -3125,7 +3133,7 @@
             if (!bookingSection) return;
 
             let hasTracked = false;
-            const observer = new IntersectionObserver((entries) => {
+            const bookingObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !hasTracked) {
                         trackEvent('booking_section_reached');
@@ -3134,7 +3142,7 @@
                 });
             }, { threshold: 0.3 });
 
-            observer.observe(bookingSection);
+            bookingObserver.observe(bookingSection);
         }
 
         // Initialize on page load
@@ -3209,17 +3217,17 @@
             rootMargin: '0px 0px -80px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
+            revealObserver.observe(el);
         });
 
         // Subtle parallax effect for hero gradients
