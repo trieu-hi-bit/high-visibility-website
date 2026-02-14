@@ -2204,6 +2204,14 @@
     <!-- Vercel Analytics Custom Events SDK -->
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+        // Define trackEvent function immediately so onclick handlers work
+        function trackEvent(eventName, eventData = {}) {
+            if (window.va) {
+                window.va('event', eventName, eventData);
+                console.log('📊 Tracked:', eventName, eventData);
+            }
+        }
     </script>
     <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 </head>
@@ -3109,12 +3117,7 @@
         // ============================================
         // VERCEL ANALYTICS EVENT TRACKING
         // ============================================
-        function trackEvent(eventName, eventData = {}) {
-            if (window.va) {
-                window.va('event', eventName, eventData);
-                console.log('📊 Tracked:', eventName, eventData);
-            }
-        }
+        // trackEvent function is defined in <head> for immediate availability
 
         // Track when user reaches booking section
         function trackBookingSectionView() {
