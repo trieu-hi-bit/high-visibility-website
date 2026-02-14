@@ -2200,6 +2200,12 @@
             min-height: 700px;
         }
     </style>
+
+    <!-- Vercel Analytics Custom Events SDK -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="https://va.vercel-scripts.com/v1/script.debug.js"></script>
 </head>
 <body>
 
@@ -2208,7 +2214,7 @@
 
     <!-- Sticky CTA Button (Mobile) -->
     <div class="sticky-cta" id="stickyCta">
-        <a href="#booking-calendar" class="btn-primary">
+        <a href="#booking-calendar" class="btn-primary" onclick="trackEvent('cta_sticky_click', {section: 'sticky-mobile'})">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                 <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
             </svg>
@@ -2260,7 +2266,7 @@
                     Keine Templates. Kein ChatGPT. Nur du.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#booking-calendar" class="btn-primary">
+                    <a href="#booking-calendar" class="btn-primary" onclick="trackEvent('cta_hero_click', {section: 'hero'})">
                         Erstgespräch vereinbaren
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
@@ -2410,7 +2416,7 @@
             </div>
 
             <div class="reveal reveal-delay-3 philosophy-cta" style="text-align: center; margin-top: 3rem;">
-                <a href="#booking-calendar" class="btn-primary" style="display: inline-flex;">
+                <a href="#booking-calendar" class="btn-primary" onclick="trackEvent('cta_philosophy_click', {section: 'philosophy'})" style="display: inline-flex;">
                     Jetzt Erstgespräch buchen
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
                 </a>
@@ -2472,7 +2478,7 @@
                     </div>
                     <div class="process-cta-container">
                         <p class="process-cta-text">Bereit für qualifizierte Anfragen?</p>
-                        <a href="#booking-calendar" class="btn-primary" style="display: inline-flex;">
+                        <a href="#booking-calendar" class="btn-primary" onclick="trackEvent('cta_process_click', {section: 'process'})" style="display: inline-flex;">
                             Jetzt Erstgespräch buchen
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                 <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
@@ -2571,7 +2577,7 @@
             </div>
 
             <div class="reveal reveal-delay-4" style="text-align: center; margin-top: 3rem;">
-                <a href="#booking-calendar" class="btn-primary" style="display: inline-flex;">
+                <a href="#booking-calendar" class="btn-primary" onclick="trackEvent('cta_results_click', {section: 'results'})" style="display: inline-flex;">
                     Jetzt Erstgespräch buchen
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
                 </a>
@@ -2637,7 +2643,7 @@
                             <div class="label">Reactions</div>
                         </div>
                     </div>
-                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7424374834882756608/" target="_blank" class="example-cta-button">
+                    <a href="https://www.linkedin.com/feed/update/urn:li:activity:7424374834882756608/" target="_blank" class="example-cta-button" onclick="trackEvent('linkedin_example_post', {source: 'results-section'})">
                         Post auf LinkedIn ansehen
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -2774,7 +2780,7 @@
             </div>
 
             <div class="reveal reveal-delay-4" style="text-align: center; margin-top: 3rem;">
-                <a href="#booking-calendar" class="btn-primary" style="display: inline-flex;">
+                <a href="#booking-calendar" class="btn-primary" onclick="trackEvent('cta_faq_click', {section: 'faq'})" style="display: inline-flex;">
                     Jetzt Erstgespräch buchen
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
                 </a>
@@ -3028,7 +3034,7 @@
                 Schreib mir auf LinkedIn. Kein Sales-Pitch. Wir schauen gemeinsam: Wo stehst du? Wer ist dein ICP? Und kann ich dir wirklich helfen, oder passt es einfach nicht? Ehrlichkeit first.
             </p>
             <div class="cta-buttons reveal reveal-delay-3">
-                <a href="https://www.linkedin.com/in/trieu-hi-au-39a808228/" target="_blank" class="btn-primary" style="display: inline-flex;">
+                <a href="https://www.linkedin.com/in/trieu-hi-au-39a808228/" target="_blank" class="btn-primary" onclick="trackEvent('linkedin_profile_visit', {source: 'cta-section'})" style="display: inline-flex;">
                     LinkedIn Profil besuchen
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 </a>
@@ -3046,6 +3052,32 @@
                      style="min-width:320px;height:700px;display:none;"></div>
                 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                 <!-- Calendly inline widget end -->
+
+                <!-- Calendly Event Tracking -->
+                <script>
+                    // Track Calendly widget load
+                    window.addEventListener('message', function(e) {
+                        if (e.origin === 'https://calendly.com' && e.data.event) {
+                            if (e.data.event === 'calendly.event_scheduled') {
+                                trackEvent('calendly_event_scheduled', {
+                                    event_type: e.data.payload?.event?.name || 'unknown'
+                                });
+                            }
+                        }
+                    });
+
+                    // Track widget load
+                    const calendlyWidget = document.querySelector('.calendly-inline-widget');
+                    if (calendlyWidget) {
+                        const checkCalendlyLoaded = setInterval(() => {
+                            const iframe = calendlyWidget.querySelector('iframe');
+                            if (iframe) {
+                                trackEvent('calendly_widget_loaded');
+                                clearInterval(checkCalendlyLoaded);
+                            }
+                        }, 500);
+                    }
+                </script>
             </div>
         </div>
     </section>
@@ -3062,7 +3094,7 @@
                 <div class="footer-copy">&copy; 2026 HI.GH Visibility. Alle Rechte vorbehalten.</div>
             </div>
             <div class="footer-links">
-                <a href="https://www.linkedin.com/in/trieu-hi-au-39a808228/" target="_blank">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/trieu-hi-au-39a808228/" target="_blank" onclick="trackEvent('linkedin_footer_visit', {source: 'footer'})">LinkedIn</a>
                 <a href="#booking-calendar">Termin buchen</a>
                 <a href="impressum.html">Impressum</a>
                 <a href="datenschutz.html">Datenschutz</a>
@@ -3074,6 +3106,40 @@
          JAVASCRIPT
          ============================================ -->
     <script>
+        // ============================================
+        // VERCEL ANALYTICS EVENT TRACKING
+        // ============================================
+        function trackEvent(eventName, eventData = {}) {
+            if (window.va) {
+                window.va('event', eventName, eventData);
+                console.log('📊 Tracked:', eventName, eventData);
+            }
+        }
+
+        // Track when user reaches booking section
+        function trackBookingSectionView() {
+            const bookingSection = document.getElementById('booking-calendar');
+            if (!bookingSection) return;
+
+            let hasTracked = false;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasTracked) {
+                        trackEvent('booking_section_reached');
+                        hasTracked = true;
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(bookingSection);
+        }
+
+        // Initialize on page load
+        trackBookingSectionView();
+
+        // ============================================
+        // NAVIGATION & UI
+        // ============================================
         // Navigation scroll effect
         const nav = document.getElementById('nav');
         let lastScroll = 0;
