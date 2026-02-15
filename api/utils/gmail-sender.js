@@ -171,6 +171,46 @@ Website: https://high-visibility.vercel.app
     `.trim();
 }
 
+/**
+ * Send a short notification email to the owner (Hi) about a new completed analysis.
+ * NEVER throws - all errors are caught internally.
+ */
+async function sendOwnerNotification(profile, leadEmail, postsCount) {
+    try {
+        const fullName = profile.fullName || 'Unbekannt';
+        const headline = profile.headline || 'Keine Headline';
+        const profileUrl = profile.profileUrl || '';
+
+        const textContent = [
+            `Neuer Lead-Magnet Abschluss:`,
+            ``,
+            `Name: ${fullName}`,
+            `Headline: ${headline}`,
+            `LinkedIn: ${profileUrl}`,
+            `E-Mail: ${leadEmail}`,
+            `Posts analysiert: ${postsCount}`,
+            ``,
+            `Analyse wurde erfolgreich per E-Mail versendet.`
+        ].join('\n');
+
+        const mailOptions = {
+            from: `"HI.GH Visibility Bot" <${process.env.FROM_EMAIL}>`,
+            to: process.env.REPLY_TO,
+            subject: `Neuer Lead: ${fullName}`,
+            text: textContent
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        console.log('[Notification] Owner notification sent:', info.messageId);
+        return { success: true, messageId: info.messageId };
+
+    } catch (error) {
+        console.error('[Notification] Failed to send owner notification:', error.message);
+        return { success: false };
+    }
+}
+
 module.exports = {
-    sendAnalysisEmail
+    sendAnalysisEmail,
+    sendOwnerNotification
 };

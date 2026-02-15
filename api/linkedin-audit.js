@@ -2,7 +2,8 @@
 const { validateInput, sanitizeEmail, extractLinkedInUsername } = require('./utils/validators');
 const { enrichProfile, fetchPosts } = require('./utils/rapidapi');
 const { analyzeProfile } = require('./utils/openrouter');
-const { sendAnalysisEmail } = require('./utils/gmail-sender');
+const { sendAnalysisEmail, sendOwnerNotification } = require('./utils/gmail-sender');
+const { createSubmissionRecord, updateSubmissionRecord } = require('./utils/airtable');
 
 // Rate limiting (in-memory, resets on cold start)
 const submissionTracker = new Map();
@@ -80,17 +81,23 @@ module.exports = async (req, res) => {
 };
 
 async function processAnalysis(email, username, linkedinUrl) {
+    let recordId = null;
+
     try {
         console.log(`[${username}] Starting analysis...`);
 
-        // Step 1: Fetch profile and posts IN PARALLEL (saves 2-4s)
+        // Step 1: Fetch profile, posts, and create Airtable record IN PARALLEL
         console.log(`[${username}] Fetching profile and posts in parallel...`);
-        const [profileResult, postsResult] = await Promise.allSettled([
+        const [profileResult, postsResult, airtableResult] = await Promise.allSettled([
             enrichProfile(username),
-            fetchPosts(username)
+            fetchPosts(username),
+            createSubmissionRecord(email, username, linkedinUrl)
         ]);
 
-        // Extract posts data (fetchPosts now returns {posts, author})
+        // Extract Airtable record ID (may be null if creation failed - that's OK)
+        recordId = airtableResult.status === 'fulfilled' ? airtableResult.value : null;
+
+        // Extract posts data (fetchPosts returns {posts, author})
         let posts = [];
         let postAuthor = null;
         if (postsResult.status === 'fulfilled') {
@@ -123,13 +130,35 @@ async function processAnalysis(email, username, linkedinUrl) {
         console.log(`[${username}] Running AI analysis...`);
         const analysis = await analyzeProfile(profile, posts);
 
-        // Step 3: Send Email (1-2s)
+        // Step 3: Send Email to user (1-2s)
         console.log(`[${username}] Sending email to ${email}...`);
         await sendAnalysisEmail(email, profile, analysis);
+
+        // Step 4: Update Airtable + notify owner IN PARALLEL (non-blocking tracking)
+        console.log(`[${username}] Updating tracking and sending owner notification...`);
+        await Promise.allSettled([
+            recordId ? updateSubmissionRecord(recordId, {
+                'Name': profile.fullName,
+                'Status': 'completed',
+                'Headline': profile.headline,
+                'Posts Analyzed': posts.length,
+                'Analysis': analysis
+            }) : Promise.resolve(),
+            sendOwnerNotification(profile, email, posts.length)
+        ]);
 
         console.log(`[${username}] Analysis completed successfully!`);
     } catch (error) {
         console.error(`[${username}] Error:`, error.message);
+
+        // Best-effort: mark Airtable record as failed
+        if (recordId) {
+            updateSubmissionRecord(recordId, {
+                'Status': 'failed',
+                'Error': error.message
+            }).catch(() => {});
+        }
+
         throw error;
     }
 }
