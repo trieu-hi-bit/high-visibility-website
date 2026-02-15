@@ -31,8 +31,14 @@ function sanitizeText(text) {
 }
 
 function extractLinkedInUsername(url) {
-    const match = url.match(/linkedin\.com\/in\/([^/?#]+)/);
-    return match ? match[1] : null;
+    if (!url) return null;
+    // Normalize: trim, remove trailing slashes/whitespace
+    const cleaned = url.trim().replace(/\/+$/, '');
+    const match = cleaned.match(/linkedin\.com\/in\/([^/?#\s]+)/);
+    if (!match) return null;
+    // Clean the username: lowercase, no trailing dots/dashes
+    const username = match[1].trim().toLowerCase().replace(/[.\-]+$/, '');
+    return username.length > 0 ? username : null;
 }
 
 module.exports = {
