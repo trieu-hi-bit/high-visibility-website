@@ -26,13 +26,7 @@ async function enrichProfile(username) {
         console.log(`[RapidAPI] Fetching profile for: ${username}`);
         console.log(`[RapidAPI] URL: ${url}`);
 
-        // Promise.race timeout implementation with 30 second timeout
-        const fetchPromise = fetch(url, options);
-        const timeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('timeout')), 30000)
-        );
-
-        const response = await Promise.race([fetchPromise, timeoutPromise]);
+        const response = await fetch(url, options);
 
         console.log(`[RapidAPI] Response status: ${response.status}`);
 
@@ -75,13 +69,7 @@ async function fetchPosts(username) {
     try {
         console.log(`[RapidAPI] Fetching posts for: ${username}`);
 
-        // 30 second timeout
-        const fetchPromise = fetch(url, options);
-        const timeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('timeout')), 30000)
-        );
-
-        const response = await Promise.race([fetchPromise, timeoutPromise]);
+        const response = await fetch(url, options);
 
         if (!response.ok) {
             throw new Error(`RapidAPI Posts Error: ${response.status}`);
