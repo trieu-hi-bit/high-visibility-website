@@ -60,33 +60,16 @@ module.exports = async (req, res) => {
         // Track submission
         submissionTracker.set(sanitizedEmail, [...recentSubmissions, now]);
 
-        // 4. Determine delay based on environment
-        const isDevelopment = process.env.NODE_ENV !== 'production';
-        const delayMinutes = isDevelopment ? 0 : Math.floor(Math.random() * 2) + 3; // 0 for dev, 3-5 for production
-        const delayMs = delayMinutes * 60 * 1000;
-
-        // 5. Send immediate response
+        // 4. Send immediate response
         res.status(200).json({
             success: true,
-            message: isDevelopment
-                ? 'Deine Analyse wird sofort erstellt und per E-Mail verschickt (Dev-Modus).'
-                : 'Deine Analyse wird erstellt und in 3-5 Minuten per E-Mail verschickt.'
+            message: 'Deine Analyse wird erstellt und in Kürze per E-Mail verschickt.'
         });
 
-        // 6. Process with delay
-        if (delayMs > 0) {
-            // Production: delay before processing
-            setTimeout(() => {
-                processAnalysis(email, username, linkedinUrl).catch(error => {
-                    console.error('Error processing analysis:', error);
-                });
-            }, delayMs);
-        } else {
-            // Development: process immediately
-            processAnalysis(email, username, linkedinUrl).catch(error => {
-                console.error('Error processing analysis:', error);
-            });
-        }
+        // 5. Process immediately (serverless functions don't support setTimeout delays)
+        processAnalysis(email, username, linkedinUrl).catch(error => {
+            console.error('Error processing analysis:', error);
+        });
 
     } catch (error) {
         console.error('API Error:', error);
