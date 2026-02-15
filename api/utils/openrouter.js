@@ -29,6 +29,9 @@ Format: Nutze klare Absätze, **Fettdruck** für Kernaussagen, und nummerierte L
     const userPrompt = buildUserPrompt(profile, posts);
 
     try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
+
         const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -45,8 +48,11 @@ Format: Nutze klare Absätze, **Fettdruck** für Kernaussagen, und nummerierte L
                 ],
                 temperature: 0.7,
                 max_tokens: 2000
-            })
+            }),
+            signal: controller.signal
         });
+
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
             throw new Error(`OpenRouter Error: ${response.status}`);
@@ -62,6 +68,10 @@ Format: Nutze klare Absätze, **Fettdruck** für Kernaussagen, und nummerierte L
 
         return analysis;
     } catch (error) {
+        if (error.name === 'AbortError') {
+            console.error('OpenRouter request timed out after 30s');
+            throw new Error('KI-Analyse Timeout. Bitte versuche es erneut.');
+        }
         console.error('Error analyzing profile:', error);
         throw new Error('KI-Analyse fehlgeschlagen. Bitte versuche es erneut.');
     }

@@ -10,14 +10,25 @@ if (!RAPIDAPI_KEY || !RAPIDAPI_HOST) {
     console.error(`RAPIDAPI_HOST: ${RAPIDAPI_HOST ? 'SET' : 'MISSING'}`);
 }
 
-// Helper function to add timeout to fetch
-function fetchWithTimeout(url, options, timeout = 15000) {
-    return Promise.race([
-        fetch(url, options),
-        new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('Request timeout')), timeout)
-        )
-    ]);
+// AbortController-based timeout - actually aborts the connection on timeout
+async function fetchWithTimeout(url, options, timeout = 15000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    try {
+        const response = await fetch(url, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        return response;
+    } catch (error) {
+        clearTimeout(timeoutId);
+        if (error.name === 'AbortError') {
+            throw new Error('Request timeout');
+        }
+        throw error;
+    }
 }
 
 async function enrichProfile(username) {
@@ -35,8 +46,7 @@ async function enrichProfile(username) {
                 'x-rapidapi-key': RAPIDAPI_KEY,
                 'Accept': 'application/json',
                 'User-Agent': 'Mozilla/5.0'
-            },
-            timeout: 15000
+            }
         }, 15000);
 
         console.log(`[RapidAPI] Response status: ${response.status}`);
@@ -62,7 +72,6 @@ async function enrichProfile(username) {
         };
     } catch (error) {
         console.error('Error enriching profile:', error.message);
-        console.error('Error stack:', error.stack);
 
         if (error.message === 'Request timeout') {
             console.error('[RapidAPI] Request timed out after 15 seconds');
@@ -86,8 +95,7 @@ async function fetchPosts(username) {
                 'x-rapidapi-key': RAPIDAPI_KEY,
                 'Accept': 'application/json',
                 'User-Agent': 'Mozilla/5.0'
-            },
-            timeout: 15000
+            }
         }, 15000);
 
         if (!response.ok) {

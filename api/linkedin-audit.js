@@ -60,22 +60,21 @@ module.exports = async (req, res) => {
         // Track submission
         submissionTracker.set(sanitizedEmail, [...recentSubmissions, now]);
 
-        // 4. Send immediate response
-        res.status(200).json({
-            success: true,
-            message: 'Deine Analyse wird erstellt und in Kürze per E-Mail verschickt.'
-        });
+        // 4. Process analysis SYNCHRONOUSLY before sending response
+        //    (Vercel kills serverless functions after response is sent)
+        await processAnalysis(email, username, linkedinUrl);
 
-        // 5. Process immediately (serverless functions don't support setTimeout delays)
-        processAnalysis(email, username, linkedinUrl).catch(error => {
-            console.error('Error processing analysis:', error);
+        // 5. Send success response AFTER processing completes
+        return res.status(200).json({
+            success: true,
+            message: 'Deine Analyse wurde erstellt und per E-Mail verschickt! Schau in dein Postfach.'
         });
 
     } catch (error) {
         console.error('API Error:', error);
         return res.status(500).json({
             success: false,
-            message: 'Ein interner Fehler ist aufgetreten. Bitte versuche es später erneut.'
+            message: 'Ein Fehler ist aufgetreten. Bitte versuche es in ein paar Minuten erneut.'
         });
     }
 };
@@ -84,26 +83,36 @@ async function processAnalysis(email, username, linkedinUrl) {
     try {
         console.log(`[${username}] Starting analysis...`);
 
-        // Step 1: Enrich Profile (2-4s)
-        console.log(`[${username}] Enriching profile...`);
-        const profile = await enrichProfile(username);
+        // Step 1: Fetch profile and posts IN PARALLEL (saves 2-4s)
+        console.log(`[${username}] Fetching profile and posts in parallel...`);
+        const [profileResult, postsResult] = await Promise.allSettled([
+            enrichProfile(username),
+            fetchPosts(username)
+        ]);
 
-        // Step 2: Fetch Posts (2-4s)
-        console.log(`[${username}] Fetching posts...`);
-        const posts = await fetchPosts(username);
+        // Profile is required - if it fails, abort
+        if (profileResult.status === 'rejected') {
+            throw new Error(profileResult.reason.message);
+        }
+        const profile = profileResult.value;
 
-        // Step 3: AI Analysis (5-8s)
+        // Posts are optional - use empty array if failed
+        const posts = postsResult.status === 'fulfilled' ? postsResult.value : [];
+        if (postsResult.status === 'rejected') {
+            console.warn(`[${username}] Posts fetch failed (continuing without posts): ${postsResult.reason.message}`);
+        }
+
+        // Step 2: AI Analysis (5-15s)
         console.log(`[${username}] Running AI analysis...`);
         const analysis = await analyzeProfile(profile, posts);
 
-        // Step 4: Send Email (1-2s)
+        // Step 3: Send Email (1-2s)
         console.log(`[${username}] Sending email to ${email}...`);
         await sendAnalysisEmail(email, profile, analysis);
 
         console.log(`[${username}] Analysis completed successfully!`);
     } catch (error) {
         console.error(`[${username}] Error:`, error.message);
-        // TODO: Send error notification email or log to monitoring service
         throw error;
     }
 }

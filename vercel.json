@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/linkedin-audit.js": {
+      "maxDuration": 60
+    }
+  }
+}

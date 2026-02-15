@@ -2579,7 +2579,7 @@
                 <span class="section-label">Kostenlose Analyse</span>
                 <h2 class="section-title">Machst du diese LinkedIn-Fehler?</h2>
                 <p class="section-desc">
-                    Erhalte eine personalisierte Analyse deines LinkedIn-Profils in 5-10 Minuten.
+                    Erhalte eine personalisierte Analyse deines LinkedIn-Profils direkt per E-Mail.
                     Basierend auf den 7 häufigsten Fehlern deutscher Unternehmer.
                 </p>
 
@@ -2626,14 +2626,14 @@
                                     <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
                                 </circle>
                             </svg>
-                            Analyse läuft...
+                            Analyse wird erstellt (ca. 15-30 Sek.)...
                         </span>
                     </button>
 
                     <div class="trust-indicators">
                         <span>✓ Kostenlos</span>
                         <span>✓ DSGVO-konform</span>
-                        <span>✓ In 5-10 Min per E-Mail</span>
+                        <span>✓ Ergebnis direkt per E-Mail</span>
                     </div>
 
                     <div id="form-message" class="form-message" role="status"></div>
@@ -3721,6 +3721,9 @@
                 btnText.style.display = 'none';
                 btnLoader.style.display = 'flex';
 
+                const fetchController = new AbortController();
+                const fetchTimeout = setTimeout(() => fetchController.abort(), 65000);
+
                 try {
                     const response = await fetch('/api/linkedin-audit', {
                         method: 'POST',
@@ -3732,9 +3735,11 @@
                             linkedinUrl,
                             consent,
                             timestamp: new Date().toISOString()
-                        })
+                        }),
+                        signal: fetchController.signal
                     });
 
+                    clearTimeout(fetchTimeout);
                     const data = await response.json();
 
                     if (response.ok && data.success) {
@@ -3752,9 +3757,14 @@
                         throw new Error(data.message || 'Ein Fehler ist aufgetreten');
                     }
                 } catch (error) {
+                    clearTimeout(fetchTimeout);
                     // Error
                     formMessage.className = 'form-message error';
-                    formMessage.textContent = '⚠️ ' + (error.message || 'Etwas ist schiefgelaufen. Bitte versuche es später erneut.');
+                    if (error.name === 'AbortError') {
+                        formMessage.textContent = '⚠️ Die Analyse dauert länger als erwartet. Bitte versuche es in ein paar Minuten erneut.';
+                    } else {
+                        formMessage.textContent = '⚠️ ' + (error.message || 'Etwas ist schiefgelaufen. Bitte versuche es später erneut.');
+                    }
 
                     trackEvent('lead_magnet_error', {
                         location: form.closest('section').id,
