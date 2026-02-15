@@ -2386,25 +2386,28 @@
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03);
         }
 
-        /* Gold header - matches real email */
+        /* Glass header - subtle, not in-your-face */
         .email-preview-header {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            padding: 22px 28px 18px;
+            background: rgba(237, 164, 54, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(237, 164, 54, 0.12);
+            padding: 20px 28px 16px;
             text-align: center;
         }
 
         .email-preview-header h4 {
             margin: 0;
             font-family: var(--font-serif);
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: #FFFFFF;
+            color: var(--gold-dark);
         }
 
         .email-preview-header p {
             margin: 3px 0 0;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.72rem;
+            color: var(--text-muted);
         }
 
         /* Email body */
@@ -2456,36 +2459,40 @@
             color: var(--text-primary);
         }
 
-        /* CTA button - matches real email pill button */
+        /* CTA button - glass outline style, subtle */
         .email-preview-cta {
             display: block;
             margin: 18px auto 0;
-            padding: 10px 24px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            color: white;
-            font-size: 0.75rem;
+            padding: 9px 22px;
+            background: transparent;
+            color: var(--gold-dark);
+            font-size: 0.72rem;
             font-weight: 600;
             text-align: center;
             border-radius: 50px;
-            border: none;
+            border: 1.5px solid var(--gold);
             cursor: default;
             width: fit-content;
+            letter-spacing: 0.2px;
         }
 
-        /* "Kostenlos" badge floating on card */
+        /* "Kostenlos" badge floating on card - glass gold style */
         .email-preview-badge {
             position: absolute;
             top: -11px;
             right: 20px;
-            background: var(--text-primary);
-            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--gold-dark);
             font-size: 0.65rem;
-            font-weight: 600;
-            padding: 5px 13px;
+            font-weight: 700;
+            padding: 5px 14px;
             border-radius: 50px;
             letter-spacing: 0.4px;
             text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1.5px solid var(--gold);
+            box-shadow: 0 4px 16px rgba(237, 164, 54, 0.15);
             z-index: 2;
         }
 
