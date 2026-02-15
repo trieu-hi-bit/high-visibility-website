@@ -2204,15 +2204,56 @@
         /* ============================================
            LEAD MAGNET FORM
            ============================================ */
+
+        /* Gold highlight for buzzwords */
+        .highlight-gold {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .highlight-gold::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gold-subtle);
+            border-radius: 3px;
+            z-index: -1;
+        }
+
         .lead-magnet-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
-            padding: 5rem 3rem;
+            padding: 5rem 3.5rem;
             background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
             border-radius: 20px;
             margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative gold glow behind visual */
+        .lead-magnet-wrapper::before {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .lead-magnet-content {
+            position: relative;
+            z-index: 1;
         }
 
         .lead-magnet-form {
@@ -2325,6 +2366,200 @@
             stroke-width: 2;
         }
 
+        /* ---- Analysis Preview Visual (Desktop) ---- */
+        .lead-magnet-visual {
+            position: relative;
+            z-index: 1;
+        }
+
+        .analysis-preview {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            transform: rotate(1.5deg);
+            transition: transform 0.5s var(--ease-out);
+        }
+
+        .analysis-preview:hover {
+            transform: rotate(0deg) translateY(-4px);
+        }
+
+        /* macOS-style top bar */
+        .preview-topbar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+        }
+
+        .preview-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .preview-topbar-title {
+            margin-left: auto;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Preview body */
+        .preview-body {
+            padding: 28px 24px;
+        }
+
+        .preview-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .preview-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Score bars */
+        .preview-scores {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .preview-score-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .preview-score-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            min-width: 110px;
+            font-weight: 500;
+        }
+
+        .preview-score-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .preview-score-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            width: 0%;
+            transition: width 1.2s var(--ease-out);
+        }
+
+        /* Animate bars when section is revealed */
+        .reveal.active .preview-score-fill.bar-1 { width: 78%; }
+        .reveal.active .preview-score-fill.bar-2 { width: 62%; }
+        .reveal.active .preview-score-fill.bar-3 { width: 91%; }
+
+        .preview-score-value {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            min-width: 32px;
+            text-align: right;
+        }
+
+        /* Divider */
+        .preview-divider {
+            height: 1px;
+            background: var(--border-light);
+            margin-bottom: 20px;
+        }
+
+        /* Checklist */
+        .preview-checks {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .preview-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .preview-check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .preview-check-icon svg {
+            width: 11px;
+            height: 11px;
+            stroke: var(--gold-dark);
+            fill: none;
+            stroke-width: 2.5;
+        }
+
+        /* Fake CTA */
+        .preview-cta {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 10px;
+            border: none;
+            cursor: default;
+            letter-spacing: 0.3px;
+        }
+
+        /* Decorative elements */
+        .lead-magnet-deco-circle {
+            position: absolute;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .lead-magnet-deco-circle.circle-1 {
+            width: 80px;
+            height: 80px;
+            top: -20px;
+            right: 40px;
+        }
+
+        .lead-magnet-deco-circle.circle-2 {
+            width: 40px;
+            height: 40px;
+            bottom: 30px;
+            right: -10px;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .lead-magnet-wrapper {
@@ -2333,8 +2568,17 @@
                 gap: 2rem;
             }
 
+            .lead-magnet-wrapper::before {
+                display: none;
+            }
+
             .lead-magnet-visual {
                 display: none;
+            }
+
+            .highlight-gold::after {
+                height: 4px;
+                bottom: 1px;
             }
         }
     </style>
@@ -2577,10 +2821,10 @@
         <div class="lead-magnet-wrapper">
             <div class="lead-magnet-content">
                 <span class="section-label">Kostenlose Analyse</span>
-                <h2 class="section-title">Machst du diese LinkedIn-Fehler?</h2>
+                <h2 class="section-title">Machst du diese <span class="highlight-gold">LinkedIn-Fehler</span>?</h2>
                 <p class="section-desc">
-                    Erhalte eine personalisierte Analyse deines LinkedIn-Profils direkt per E-Mail.
-                    Basierend auf den 7 häufigsten Fehlern deutscher Unternehmer.
+                    Erhalte eine <span class="highlight-gold">personalisierte Analyse</span> deines LinkedIn-Profils direkt per E-Mail.
+                    Basierend auf den <span class="highlight-gold">7 häufigsten Fehlern</span> deutscher Unternehmer.
                 </p>
 
                 <form id="linkedin-audit-form" class="lead-magnet-form">
@@ -2641,7 +2885,69 @@
             </div>
 
             <div class="lead-magnet-visual">
-                <!-- Optional: Preview image or animated illustration -->
+                <div class="lead-magnet-deco-circle circle-1"></div>
+                <div class="lead-magnet-deco-circle circle-2"></div>
+                <div class="analysis-preview">
+                    <div class="preview-topbar">
+                        <div class="preview-dot"></div>
+                        <div class="preview-dot"></div>
+                        <div class="preview-dot"></div>
+                        <span class="preview-topbar-title">HI.GH Visibility</span>
+                    </div>
+                    <div class="preview-body">
+                        <div class="preview-title">Deine LinkedIn-Analyse</div>
+                        <div class="preview-subtitle">Personalisiert von Hi - basierend auf deinem Profil & Posts</div>
+
+                        <div class="preview-scores">
+                            <div class="preview-score-row">
+                                <span class="preview-score-label">Profil-Score</span>
+                                <div class="preview-score-bar">
+                                    <div class="preview-score-fill bar-1"></div>
+                                </div>
+                                <span class="preview-score-value">78%</span>
+                            </div>
+                            <div class="preview-score-row">
+                                <span class="preview-score-label">Content-Qualität</span>
+                                <div class="preview-score-bar">
+                                    <div class="preview-score-fill bar-2"></div>
+                                </div>
+                                <span class="preview-score-value">62%</span>
+                            </div>
+                            <div class="preview-score-row">
+                                <span class="preview-score-label">Engagement</span>
+                                <div class="preview-score-bar">
+                                    <div class="preview-score-fill bar-3"></div>
+                                </div>
+                                <span class="preview-score-value">91%</span>
+                            </div>
+                        </div>
+
+                        <div class="preview-divider"></div>
+
+                        <div class="preview-checks">
+                            <div class="preview-check">
+                                <div class="preview-check-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <span>3 Quick Wins für dein Profil</span>
+                            </div>
+                            <div class="preview-check">
+                                <div class="preview-check-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <span>Persönliche Empfehlungen</span>
+                            </div>
+                            <div class="preview-check">
+                                <div class="preview-check-icon">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <span>Analyse deiner letzten Posts</span>
+                            </div>
+                        </div>
+
+                        <div class="preview-cta">Kostenlos erhalten &rarr;</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
