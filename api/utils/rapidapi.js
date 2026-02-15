@@ -1,6 +1,5 @@
 // api/utils/rapidapi.js
-const fetch = require('node-fetch');
-
+// Use native fetch (Node 18+) instead of node-fetch
 const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
 const RAPIDAPI_HOST = process.env.RAPIDAPI_HOST;
 
@@ -12,36 +11,20 @@ if (!RAPIDAPI_KEY || !RAPIDAPI_HOST) {
 }
 
 async function enrichProfile(username) {
-    // TEMPORARY: Use mock data to test OpenRouter + Gmail workflow
-    console.log(`[RapidAPI] Using MOCK data for testing (RapidAPI not responding)`);
-
-    return {
-        fullName: username.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-        headline: 'LinkedIn Consultant & Content Strategist',
-        about: 'Helping B2B companies build authentic LinkedIn presence.',
-        connections: 500,
-        followers: 1200,
-        industry: 'Marketing & Advertising',
-        location: 'Germany',
-        profileUrl: `https://linkedin.com/in/${username}`
-    };
-
-    /* ORIGINAL CODE - DISABLED FOR TESTING
     const url = `https://${RAPIDAPI_HOST}/?username=${username}`;
-
-    const options = {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-host': RAPIDAPI_HOST,
-            'x-rapidapi-key': RAPIDAPI_KEY
-        }
-    };
 
     try {
         console.log(`[RapidAPI] Fetching profile for: ${username}`);
         console.log(`[RapidAPI] URL: ${url}`);
+        console.log(`[RapidAPI] Key: ${RAPIDAPI_KEY ? 'SET (length: ' + RAPIDAPI_KEY.length + ')' : 'MISSING'}`);
 
-        const response = await fetch(url, options);
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-host': RAPIDAPI_HOST,
+                'x-rapidapi-key': RAPIDAPI_KEY
+            }
+        });
 
         console.log(`[RapidAPI] Response status: ${response.status}`);
 
@@ -66,51 +49,27 @@ async function enrichProfile(username) {
         };
     } catch (error) {
         console.error('Error enriching profile:', error.message);
+        console.error('Error stack:', error.stack);
         throw new Error('Profil konnte nicht abgerufen werden. Bitte überprüfe die URL.');
     }
-    */
 }
 
 async function fetchPosts(username) {
-    // TEMPORARY: Use mock posts for testing
-    console.log(`[RapidAPI] Using MOCK posts for testing`);
-
-    return [
-        {
-            text: 'Example LinkedIn post about building authentic content that resonates with your audience.',
-            likes: 85,
-            comments: 12,
-            shares: 3,
-            date: new Date().toISOString(),
-            url: ''
-        },
-        {
-            text: 'Another post discussing LinkedIn strategy and personal branding for B2B professionals.',
-            likes: 120,
-            comments: 18,
-            shares: 5,
-            date: new Date(Date.now() - 86400000).toISOString(),
-            url: ''
-        }
-    ];
-
-    /* ORIGINAL CODE - DISABLED FOR TESTING
     const url = `https://${RAPIDAPI_HOST}/get-profile-posts?start=0&username=${username}`;
-
-    const options = {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-host': RAPIDAPI_HOST,
-            'x-rapidapi-key': RAPIDAPI_KEY
-        }
-    };
 
     try {
         console.log(`[RapidAPI] Fetching posts for: ${username}`);
 
-        const response = await fetch(url, options);
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-host': RAPIDAPI_HOST,
+                'x-rapidapi-key': RAPIDAPI_KEY
+            }
+        });
 
         if (!response.ok) {
+            console.error(`[RapidAPI] Posts error: ${response.status}`);
             throw new Error(`RapidAPI Posts Error: ${response.status}`);
         }
 
@@ -133,7 +92,6 @@ async function fetchPosts(username) {
         // Don't fail if posts can't be fetched - continue with profile only
         return [];
     }
-    */
 }
 
 module.exports = {
