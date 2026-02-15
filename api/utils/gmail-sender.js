@@ -102,8 +102,10 @@ function generateEmailHTML(profile, analysisText) {
                                     <td align="center">
                                         <a href="https://calendly.com/trieu-hi-gethighvisibility/30min?utm_source=email&utm_medium=analysis&utm_campaign=lead_magnet"
                                            class="cta-button"
-                                           style="display: inline-block; padding: 16px 36px; background: linear-gradient(135deg, #EDA436 0%, #D4922E 100%); color: #FFFFFF; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 15px;">
-                                            Kostenloses Erstgespräch buchen
+                                           style="display: inline-block; padding: 16px 36px; background-color: #EDA436; color: #FFFFFF; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 15px; mso-padding-alt: 0; text-align: center;">
+                                            <!--[if mso]><i style="letter-spacing: 36px; mso-font-width: -100%; mso-text-raise: 24pt;">&nbsp;</i><![endif]-->
+                                            <span style="mso-text-raise: 12pt;">Kostenloses Erstgespräch buchen</span>
+                                            <!--[if mso]><i style="letter-spacing: 36px; mso-font-width: -100%;">&nbsp;</i><![endif]-->
                                         </a>
                                     </td>
                                 </tr>
