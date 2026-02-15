@@ -90,16 +90,33 @@ async function processAnalysis(email, username, linkedinUrl) {
             fetchPosts(username)
         ]);
 
-        // Profile is required - if it fails, abort
-        if (profileResult.status === 'rejected') {
-            throw new Error(profileResult.reason.message);
+        // Extract posts data (fetchPosts now returns {posts, author})
+        let posts = [];
+        let postAuthor = null;
+        if (postsResult.status === 'fulfilled') {
+            posts = postsResult.value.posts || [];
+            postAuthor = postsResult.value.author || null;
+        } else {
+            console.warn(`[${username}] Posts fetch failed: ${postsResult.reason.message}`);
         }
-        const profile = profileResult.value;
 
-        // Posts are optional - use empty array if failed
-        const posts = postsResult.status === 'fulfilled' ? postsResult.value : [];
-        if (postsResult.status === 'rejected') {
-            console.warn(`[${username}] Posts fetch failed (continuing without posts): ${postsResult.reason.message}`);
+        // Profile: use API data, or fallback to author data from posts
+        let profile;
+        if (profileResult.status === 'fulfilled') {
+            profile = profileResult.value;
+        } else if (postAuthor) {
+            console.warn(`[${username}] Profile API failed, using author data from posts as fallback`);
+            profile = {
+                fullName: `${postAuthor.firstName || ''} ${postAuthor.lastName || ''}`.trim() || 'LinkedIn User',
+                headline: postAuthor.headline || '',
+                about: '',
+                location: '',
+                profileUrl: postAuthor.username ? `https://linkedin.com/in/${postAuthor.username}` : '',
+                isCreator: false,
+                isPremium: false
+            };
+        } else {
+            throw new Error(profileResult.reason.message);
         }
 
         // Step 2: AI Analysis (5-15s)

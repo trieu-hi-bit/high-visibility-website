@@ -59,6 +59,12 @@ async function enrichProfile(username) {
 
         const data = await response.json();
 
+        // API can return HTTP 200 with {success: false} on errors (e.g. Bad Gateway)
+        if (data.success === false) {
+            console.error(`[RapidAPI] API returned success:false - ${data.message || 'Unknown error'}`);
+            throw new Error(`RapidAPI Error: ${data.message || 'Profile not found'}`);
+        }
+
         // API returns firstName/lastName separately, no fullName field
         const fullName = data.fullName || `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'LinkedIn User';
         console.log(`[RapidAPI] Profile data received for: ${fullName}`);
@@ -106,13 +112,23 @@ async function fetchPosts(username) {
         }
 
         const data = await response.json();
+
+        // API can return HTTP 200 with {success: false} on errors
+        if (data.success === false) {
+            console.error(`[RapidAPI] Posts API returned success:false - ${data.message || 'Unknown error'}`);
+            throw new Error(`RapidAPI Posts Error: ${data.message || 'Posts not found'}`);
+        }
+
         const posts = data.data || data.posts || [];
 
         console.log(`[RapidAPI] Fetched ${posts.length} posts`);
 
+        // Extract author info from first post (fallback if profile API fails)
+        const author = posts[0]?.author || null;
+
         // Extract last 15 posts with engagement data
         // API fields: totalReactionCount, likeCount, commentsCount, repostsCount, postedDate
-        return posts.slice(0, 15).map(post => ({
+        const mappedPosts = posts.slice(0, 15).map(post => ({
             text: (post.text || '').substring(0, 500),
             totalReactions: post.totalReactionCount || 0,
             likes: post.likeCount || 0,
@@ -120,7 +136,9 @@ async function fetchPosts(username) {
             reposts: post.repostsCount || 0,
             date: post.postedDate || post.postedAt || '',
             url: post.postUrl || ''
-        })).filter(post => post.text.length > 20); // Filter empty posts
+        })).filter(post => post.text.length > 20);
+
+        return { posts: mappedPosts, author };
     } catch (error) {
         console.error('Error fetching posts:', error.message);
 
