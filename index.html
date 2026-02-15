@@ -2459,22 +2459,14 @@
             color: var(--text-primary);
         }
 
-        /* CTA button - glass outline style, subtle */
-        .email-preview-cta {
-            display: block;
-            margin: 18px auto 0;
-            padding: 9px 22px;
-            background: transparent;
+        .email-preview-snippet.email-preview-tip {
             color: var(--gold-dark);
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-align: center;
-            border-radius: 50px;
-            border: 1.5px solid var(--gold);
-            cursor: default;
-            width: fit-content;
-            letter-spacing: 0.2px;
+            font-weight: 500;
+            margin-bottom: 0;
+            font-size: 0.76rem;
         }
+
+        /* (CTA removed - was too pitchy for a preview card) */
 
         /* "Kostenlos" badge floating on card - glass gold style */
         .email-preview-badge {
@@ -2863,18 +2855,21 @@
                         <!-- Intro lines -->
                         <div class="email-preview-line w-full"></div>
                         <div class="email-preview-line w-90"></div>
-                        <div class="email-preview-line w-75"></div>
                         <div class="email-preview-line spacer"></div>
-                        <!-- Analysis box with readable snippet -->
+                        <!-- Analysis snippet 1 -->
                         <div class="email-preview-analysis">
                             <div class="email-preview-snippet">
-                                <strong>Fehler #1: Deine Headline spricht alle an</strong> - und damit niemanden. Tipp: Nenne deinen ICP direkt beim Namen, z.B. "Ich helfe B2B-Beratern, mit LinkedIn..."
+                                <strong>1. Content ohne klare Audience-Strategie</strong><br>
+                                Deine Posts schwanken stark im Engagement. Der virale Hit traf einen Nerv bei deiner Zielgruppe - aber die folgenden Posts sprechen eher Tech-Enthusiasten an.
                             </div>
-                            <div class="email-preview-line w-full"></div>
-                            <div class="email-preview-line w-75"></div>
+                            <div class="email-preview-snippet email-preview-tip">
+                                &rarr; Konzentriere dich auf Posts, die die täglichen Herausforderungen deiner Zielgruppe ansprechen.
+                            </div>
                         </div>
-                        <!-- CTA like the real email -->
-                        <div class="email-preview-cta">Erstgespräch buchen</div>
+                        <!-- Blurred continuation -->
+                        <div class="email-preview-line w-full" style="margin-top: 14px;"></div>
+                        <div class="email-preview-line w-90"></div>
+                        <div class="email-preview-line w-60"></div>
                     </div>
                 </div>
             </div>
