@@ -40,12 +40,12 @@ STRUKTUR DER ANALYSE:
 
 WICHTIG:
 - Sprich die Person IMMER mit ihrem Vornamen an (aus den Profildaten).
-- Beziehe dich auf ECHTE Daten: Headline, About-Text, Post-Inhalte, Engagement-Zahlen.
+- Beziehe dich auf ECHTE Daten: Headline, About-Text, Post-Inhalte, Engagement-Zahlen (Reaktionen, Kommentare, Reposts).
 - Wenn der About-Text fehlt oder leer ist, erwähne das als konkretes Problem.
-- Wenn Connections/Followers bei 0 angezeigt werden, sage nicht "du hast 0 Follower", sondern überspringe diesen Datenpunkt (API zeigt manchmal 0 bei privaten Profilen).
+- Du hast KEINE Daten über Connections oder Followers - erwähne sie nicht und rate nicht.
+- Analysiere die Post-Engagement-Zahlen konkret: Welche Posts laufen gut, welche nicht? Was sagt das über die Content-Strategie?
 - Schreibe ca. 600-800 Wörter. Nicht mehr. Qualität > Quantität.
-- Kein "Hallo LinkedIn" oder ähnliches - du schreibst eine persönliche E-Mail, keinen Post.
-- KEIN Grußwort am Anfang (kein "Hallo", "Hi", "Hey") - das steht bereits in der E-Mail-Vorlage.
+- KEIN Grußwort am Anfang (kein "Hallo", "Hi", "Hey", "Hallo LinkedIn") - das steht bereits in der E-Mail-Vorlage.
 - KEINE Unterschrift am Ende (kein "Beste Grüße", "LG Hi" etc.) - das steht bereits in der E-Mail-Vorlage.
 - Der CTA am Ende soll sein: Ein Hinweis auf das kostenlose Erstgespräch (Calendly-Link ist bereits in der E-Mail als Button eingebaut, also verweise darauf mit etwas wie "Klick auf den Button unten und such dir einen Termin aus.").
 
@@ -113,27 +113,24 @@ PROFIL:
 - Name: ${profile.fullName} (Vorname: ${firstName})
 - Headline: "${profile.headline || 'Keine Headline vorhanden'}"
 - About/Info-Bereich: ${profile.about ? `"${profile.about.substring(0, 800)}"` : 'LEER - kein About-Text vorhanden'}
-- Branche: ${profile.industry || 'Nicht angegeben'}
 - Standort: ${profile.location || 'Nicht angegeben'}`;
 
-    if (profile.connections > 0) {
-        prompt += `\n- Connections: ${profile.connections}`;
-    }
-    if (profile.followers > 0) {
-        prompt += `\n- Followers: ${profile.followers}`;
-    }
-
     if (posts && posts.length > 0) {
-        const totalLikes = posts.reduce((sum, p) => sum + p.likes, 0);
+        const totalReactions = posts.reduce((sum, p) => sum + p.totalReactions, 0);
         const totalComments = posts.reduce((sum, p) => sum + p.comments, 0);
-        const avgLikes = Math.round(totalLikes / posts.length);
+        const avgReactions = Math.round(totalReactions / posts.length);
         const avgComments = Math.round(totalComments / posts.length);
 
-        prompt += `\n\nPOSTS (${posts.length} letzte Posts, Durchschnitt: ${avgLikes} Likes, ${avgComments} Kommentare):\n`;
+        // Find best performing post
+        const bestPost = posts.reduce((best, p) => p.totalReactions > best.totalReactions ? p : best, posts[0]);
+
+        prompt += `\n\nPOSTS (${posts.length} letzte Posts):
+- Durchschnitt: ${avgReactions} Reaktionen, ${avgComments} Kommentare pro Post
+- Bester Post: ${bestPost.totalReactions} Reaktionen, ${bestPost.comments} Kommentare\n`;
 
         posts.slice(0, 10).forEach((post, i) => {
             prompt += `\nPost ${i + 1}: "${post.text.substring(0, 400)}${post.text.length > 400 ? '...' : ''}"`;
-            prompt += `\n→ ${post.likes} Likes, ${post.comments} Kommentare, ${post.shares} Shares\n`;
+            prompt += `\n→ ${post.totalReactions} Reaktionen (${post.likes} Likes), ${post.comments} Kommentare, ${post.reposts} Reposts\n`;
         });
     } else {
         prompt += `\n\nPOSTS: Keine Posts verfügbar. Das Profil ist möglicherweise privat oder die Person postet nicht.`;

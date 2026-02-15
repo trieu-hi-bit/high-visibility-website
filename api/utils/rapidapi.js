@@ -58,17 +58,19 @@ async function enrichProfile(username) {
         }
 
         const data = await response.json();
-        console.log(`[RapidAPI] Profile data received for: ${data.fullName || data.name}`);
+
+        // API returns firstName/lastName separately, no fullName field
+        const fullName = data.fullName || `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'LinkedIn User';
+        console.log(`[RapidAPI] Profile data received for: ${fullName}`);
 
         return {
-            fullName: data.fullName || data.name || 'LinkedIn User',
+            fullName,
             headline: data.headline || '',
-            about: data.about || data.summary || '',
-            connections: data.connectionsCount || data.connections || 0,
-            followers: data.followersCount || data.followers || 0,
-            industry: data.industry || '',
-            location: data.location || '',
-            profileUrl: data.publicIdentifier ? `https://linkedin.com/in/${data.publicIdentifier}` : ''
+            about: data.summary || data.about || '',
+            location: data.geo ? data.geo.full || data.geo.city || '' : (data.location || ''),
+            profileUrl: data.username ? `https://linkedin.com/in/${data.username}` : '',
+            isCreator: data.isCreator || false,
+            isPremium: data.isPremium || false
         };
     } catch (error) {
         console.error('Error enriching profile:', error.message);
@@ -108,14 +110,16 @@ async function fetchPosts(username) {
 
         console.log(`[RapidAPI] Fetched ${posts.length} posts`);
 
-        // Extract last 10-15 posts with engagement data
+        // Extract last 15 posts with engagement data
+        // API fields: totalReactionCount, likeCount, commentsCount, repostsCount, postedDate
         return posts.slice(0, 15).map(post => ({
-            text: (post.text || post.commentary || '').substring(0, 500),
-            likes: post.numLikes || post.likesCount || 0,
-            comments: post.numComments || post.commentsCount || 0,
-            shares: post.numShares || post.sharesCount || 0,
-            date: post.postedAt || post.created || '',
-            url: post.url || ''
+            text: (post.text || '').substring(0, 500),
+            totalReactions: post.totalReactionCount || 0,
+            likes: post.likeCount || 0,
+            comments: post.commentsCount || 0,
+            reposts: post.repostsCount || 0,
+            date: post.postedDate || post.postedAt || '',
+            url: post.postUrl || ''
         })).filter(post => post.text.length > 20); // Filter empty posts
     } catch (error) {
         console.error('Error fetching posts:', error.message);
