@@ -2366,198 +2366,153 @@
             stroke-width: 2;
         }
 
-        /* ---- Analysis Preview Visual (Desktop) ---- */
+        /* ---- Email Preview Visual (Desktop) ---- */
         .lead-magnet-visual {
             position: relative;
             z-index: 1;
         }
 
-        .analysis-preview {
+        .email-preview {
             background: var(--bg-primary);
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
             overflow: hidden;
-            transform: rotate(1.5deg);
-            transition: transform 0.5s var(--ease-out);
+            transform: rotate(1deg);
+            transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
         }
 
-        .analysis-preview:hover {
-            transform: rotate(0deg) translateY(-4px);
+        .email-preview:hover {
+            transform: rotate(0deg) translateY(-6px);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03);
         }
 
-        /* macOS-style top bar */
-        .preview-topbar {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 14px 18px;
+        /* Gold header - matches real email */
+        .email-preview-header {
             background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            padding: 22px 28px 18px;
+            text-align: center;
         }
 
-        .preview-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-        }
-
-        .preview-topbar-title {
-            margin-left: auto;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        /* Preview body */
-        .preview-body {
-            padding: 28px 24px;
-        }
-
-        .preview-title {
+        .email-preview-header h4 {
+            margin: 0;
             font-family: var(--font-serif);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 6px;
+            color: #FFFFFF;
         }
 
-        .preview-subtitle {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
+        .email-preview-header p {
+            margin: 3px 0 0;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        /* Score bars */
-        .preview-scores {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 24px;
+        /* Email body */
+        .email-preview-body {
+            padding: 24px 26px 20px;
         }
 
-        .preview-score-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .preview-score-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            min-width: 110px;
-            font-weight: 500;
-        }
-
-        .preview-score-bar {
-            flex: 1;
-            height: 8px;
+        /* Simulated text lines */
+        .email-preview-line {
+            height: 7px;
+            border-radius: 4px;
             background: var(--bg-tertiary);
-            border-radius: 4px;
-            overflow: hidden;
+            margin-bottom: 9px;
         }
 
-        .preview-score-fill {
-            height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            width: 0%;
-            transition: width 1.2s var(--ease-out);
+        .email-preview-line.w-full { width: 100%; }
+        .email-preview-line.w-90 { width: 90%; }
+        .email-preview-line.w-75 { width: 75%; }
+        .email-preview-line.w-60 { width: 60%; }
+
+        .email-preview-line.spacer {
+            height: 0;
+            margin-bottom: 16px;
+            background: none;
         }
 
-        /* Animate bars when section is revealed */
-        .reveal.active .preview-score-fill.bar-1 { width: 78%; }
-        .reveal.active .preview-score-fill.bar-2 { width: 62%; }
-        .reveal.active .preview-score-fill.bar-3 { width: 91%; }
+        /* Analysis box - matches real email gold-border style */
+        .email-preview-analysis {
+            background: #F9F6F1;
+            border-left: 3px solid var(--gold);
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin: 16px 0;
+        }
 
-        .preview-score-value {
+        .email-preview-analysis .email-preview-line {
+            background: rgba(237, 164, 54, 0.12);
+        }
+
+        /* Readable snippet */
+        .email-preview-snippet {
             font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--gold-dark);
-            min-width: 32px;
-            text-align: right;
-        }
-
-        /* Divider */
-        .preview-divider {
-            height: 1px;
-            background: var(--border-light);
-            margin-bottom: 20px;
-        }
-
-        /* Checklist */
-        .preview-checks {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 24px;
-        }
-
-        .preview-check {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
+            line-height: 1.7;
             color: var(--text-secondary);
+            margin-bottom: 10px;
         }
 
-        .preview-check-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--gold-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+        .email-preview-snippet strong {
+            color: var(--text-primary);
         }
 
-        .preview-check-icon svg {
-            width: 11px;
-            height: 11px;
-            stroke: var(--gold-dark);
-            fill: none;
-            stroke-width: 2.5;
-        }
-
-        /* Fake CTA */
-        .preview-cta {
+        /* CTA button - matches real email pill button */
+        .email-preview-cta {
             display: block;
-            width: 100%;
-            padding: 12px;
+            margin: 18px auto 0;
+            padding: 10px 24px;
             background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 50px;
             border: none;
             cursor: default;
-            letter-spacing: 0.3px;
+            width: fit-content;
+        }
+
+        /* "Kostenlos" badge floating on card */
+        .email-preview-badge {
+            position: absolute;
+            top: -11px;
+            right: 20px;
+            background: var(--text-primary);
+            color: #FFFFFF;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 5px 13px;
+            border-radius: 50px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 2;
         }
 
         /* Decorative elements */
-        .lead-magnet-deco-circle {
+        .lead-magnet-deco {
             position: absolute;
-            border: 2px solid var(--gold);
-            border-radius: 50%;
-            opacity: 0.12;
             pointer-events: none;
         }
 
-        .lead-magnet-deco-circle.circle-1 {
-            width: 80px;
-            height: 80px;
-            top: -20px;
-            right: 40px;
+        .lead-magnet-deco.deco-ring {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.1;
+            top: -16px;
+            right: 60px;
         }
 
-        .lead-magnet-deco-circle.circle-2 {
-            width: 40px;
-            height: 40px;
-            bottom: 30px;
-            right: -10px;
+        .lead-magnet-deco.deco-dot {
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.06;
+            bottom: 20px;
+            right: -8px;
         }
 
         /* Mobile Responsive */
@@ -2885,67 +2840,35 @@
             </div>
 
             <div class="lead-magnet-visual">
-                <div class="lead-magnet-deco-circle circle-1"></div>
-                <div class="lead-magnet-deco-circle circle-2"></div>
-                <div class="analysis-preview">
-                    <div class="preview-topbar">
-                        <div class="preview-dot"></div>
-                        <div class="preview-dot"></div>
-                        <div class="preview-dot"></div>
-                        <span class="preview-topbar-title">HI.GH Visibility</span>
+                <div class="lead-magnet-deco deco-ring"></div>
+                <div class="lead-magnet-deco deco-dot"></div>
+                <div class="email-preview-badge">Kostenlos</div>
+                <div class="email-preview">
+                    <!-- Gold header like the real email -->
+                    <div class="email-preview-header">
+                        <h4>Deine LinkedIn-Analyse</h4>
+                        <p>Persönlich für dich, [Dein Name]</p>
                     </div>
-                    <div class="preview-body">
-                        <div class="preview-title">Deine LinkedIn-Analyse</div>
-                        <div class="preview-subtitle">Personalisiert von Hi - basierend auf deinem Profil & Posts</div>
-
-                        <div class="preview-scores">
-                            <div class="preview-score-row">
-                                <span class="preview-score-label">Profil-Score</span>
-                                <div class="preview-score-bar">
-                                    <div class="preview-score-fill bar-1"></div>
-                                </div>
-                                <span class="preview-score-value">78%</span>
+                    <div class="email-preview-body">
+                        <!-- Greeting -->
+                        <div class="email-preview-line w-40"></div>
+                        <div class="email-preview-line spacer"></div>
+                        <!-- Intro lines -->
+                        <div class="email-preview-line w-full"></div>
+                        <div class="email-preview-line w-90"></div>
+                        <div class="email-preview-line w-75"></div>
+                        <div class="email-preview-line spacer"></div>
+                        <!-- Analysis box with readable snippet -->
+                        <div class="email-preview-analysis">
+                            <div class="email-preview-snippet">
+                                <strong>Fehler #1: Deine Headline spricht alle an</strong> - und damit niemanden wirklich. Wer auf dein Profil kommt, muss in 3 Sekunden verstehen...
                             </div>
-                            <div class="preview-score-row">
-                                <span class="preview-score-label">Content-Qualität</span>
-                                <div class="preview-score-bar">
-                                    <div class="preview-score-fill bar-2"></div>
-                                </div>
-                                <span class="preview-score-value">62%</span>
-                            </div>
-                            <div class="preview-score-row">
-                                <span class="preview-score-label">Engagement</span>
-                                <div class="preview-score-bar">
-                                    <div class="preview-score-fill bar-3"></div>
-                                </div>
-                                <span class="preview-score-value">91%</span>
-                            </div>
+                            <div class="email-preview-line w-full"></div>
+                            <div class="email-preview-line w-90"></div>
+                            <div class="email-preview-line w-60"></div>
                         </div>
-
-                        <div class="preview-divider"></div>
-
-                        <div class="preview-checks">
-                            <div class="preview-check">
-                                <div class="preview-check-icon">
-                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                                </div>
-                                <span>3 Quick Wins für dein Profil</span>
-                            </div>
-                            <div class="preview-check">
-                                <div class="preview-check-icon">
-                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                                </div>
-                                <span>Persönliche Empfehlungen</span>
-                            </div>
-                            <div class="preview-check">
-                                <div class="preview-check-icon">
-                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                                </div>
-                                <span>Analyse deiner letzten Posts</span>
-                            </div>
-                        </div>
-
-                        <div class="preview-cta">Kostenlos erhalten &rarr;</div>
+                        <!-- CTA like the real email -->
+                        <div class="email-preview-cta">Erstgespräch buchen</div>
                     </div>
                 </div>
             </div>
