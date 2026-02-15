@@ -2200,6 +2200,143 @@
         .calendly-inline-widget {
             min-height: 700px;
         }
+
+        /* ============================================
+           LEAD MAGNET FORM
+           ============================================ */
+        .lead-magnet-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 5rem 3rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .lead-magnet-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="url"] {
+            padding: 0.875rem 1.25rem;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            transition: all 0.3s ease;
+            background: var(--bg-primary);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-subtle);
+        }
+
+        .form-group input.error {
+            border-color: #dc2626;
+        }
+
+        .error-message {
+            font-size: 0.8rem;
+            color: #dc2626;
+            display: none;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        .checkbox-group {
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 0.25rem;
+            cursor: pointer;
+        }
+
+        .trust-indicators {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .form-message {
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .form-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #dc2626;
+            display: block;
+        }
+
+        .btn-loader {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .lead-magnet-wrapper {
+                grid-template-columns: 1fr;
+                padding: 3rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .lead-magnet-visual {
+                display: none;
+            }
+        }
     </style>
 
     <!-- Vercel Analytics Custom Events SDK -->
@@ -2429,6 +2566,82 @@
                     Jetzt Erstgespräch buchen
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         LEAD MAGNET - PHILOSOPHY PLACEMENT
+         ============================================ -->
+    <section id="lead-magnet-analysis" class="section-container reveal">
+        <div class="lead-magnet-wrapper">
+            <div class="lead-magnet-content">
+                <span class="section-label">Kostenlose Analyse</span>
+                <h2 class="section-title">Machst du diese LinkedIn-Fehler?</h2>
+                <p class="section-desc">
+                    Erhalte eine personalisierte Analyse deines LinkedIn-Profils in 5-10 Minuten.
+                    Basierend auf den 7 häufigsten Fehlern deutscher Unternehmer.
+                </p>
+
+                <form id="linkedin-audit-form" class="lead-magnet-form">
+                    <div class="form-group">
+                        <label for="email">E-Mail-Adresse</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="deine@email.de"
+                            aria-describedby="email-error"
+                        />
+                        <span id="email-error" class="error-message" role="alert"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="linkedinUrl">LinkedIn Profil URL</label>
+                        <input
+                            type="url"
+                            id="linkedinUrl"
+                            name="linkedinUrl"
+                            required
+                            placeholder="https://linkedin.com/in/dein-profil"
+                            pattern="https?://(www\.)?linkedin\.com/in/.*"
+                            aria-describedby="linkedin-error"
+                        />
+                        <span id="linkedin-error" class="error-message" role="alert"></span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="consent" name="consent" required />
+                            <span>Ich akzeptiere die <a href="/datenschutz.html" target="_blank">Datenschutzerklärung</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="submit-btn">
+                        <span class="btn-text">Kostenlose Analyse erhalten</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="31.4 31.4" transform="rotate(-90 12 12)">
+                                    <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
+                                </circle>
+                            </svg>
+                            Analyse läuft...
+                        </span>
+                    </button>
+
+                    <div class="trust-indicators">
+                        <span>✓ Kostenlos</span>
+                        <span>✓ DSGVO-konform</span>
+                        <span>✓ In 5-10 Min per E-Mail</span>
+                    </div>
+
+                    <div id="form-message" class="form-message" role="status"></div>
+                </form>
+            </div>
+
+            <div class="lead-magnet-visual">
+                <!-- Optional: Preview image or animated illustration -->
             </div>
         </div>
     </section>
@@ -3391,6 +3604,170 @@
                 }
             }
         });
+
+        // ============================================
+        // LEAD MAGNET FORM HANDLER
+        // ============================================
+        (function() {
+            const form = document.getElementById('linkedin-audit-form');
+            if (!form) return;
+
+            const emailInput = form.querySelector('#email');
+            const linkedinInput = form.querySelector('#linkedinUrl');
+            const submitBtn = form.querySelector('#submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+            const formMessage = document.getElementById('form-message');
+
+            // Track form view via IntersectionObserver
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        trackEvent('lead_magnet_form_viewed', {
+                            location: form.closest('section').id
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(form);
+
+            // Real-time validation
+            function validateEmail(email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+
+            function validateLinkedInURL(url) {
+                const regex = /^https?:\/\/(www\.)?linkedin\.com\/in\/.+/;
+                return regex.test(url);
+            }
+
+            function showError(input, message) {
+                input.classList.add('error');
+                const errorEl = input.parentElement.querySelector('.error-message');
+                errorEl.textContent = message;
+                errorEl.classList.add('visible');
+            }
+
+            function clearError(input) {
+                input.classList.remove('error');
+                const errorEl = input.parentElement.querySelector('.error-message');
+                errorEl.textContent = '';
+                errorEl.classList.remove('visible');
+            }
+
+            // Blur validation
+            emailInput.addEventListener('blur', () => {
+                if (emailInput.value && !validateEmail(emailInput.value)) {
+                    showError(emailInput, 'Bitte gib eine gültige E-Mail-Adresse ein');
+                } else {
+                    clearError(emailInput);
+                }
+            });
+
+            linkedinInput.addEventListener('blur', () => {
+                if (linkedinInput.value && !validateLinkedInURL(linkedinInput.value)) {
+                    showError(linkedinInput, 'Bitte gib eine gültige LinkedIn-Profil-URL ein (z.B. https://linkedin.com/in/dein-name)');
+                } else {
+                    clearError(linkedinInput);
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Clear previous messages
+                formMessage.className = 'form-message';
+                formMessage.textContent = '';
+                clearError(emailInput);
+                clearError(linkedinInput);
+
+                // Validate
+                const email = emailInput.value.trim();
+                const linkedinUrl = linkedinInput.value.trim();
+                const consent = form.querySelector('#consent').checked;
+
+                let hasError = false;
+
+                if (!validateEmail(email)) {
+                    showError(emailInput, 'Ungültige E-Mail-Adresse');
+                    hasError = true;
+                }
+
+                if (!validateLinkedInURL(linkedinUrl)) {
+                    showError(linkedinInput, 'Ungültige LinkedIn-URL');
+                    hasError = true;
+                }
+
+                if (!consent) {
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = 'Bitte akzeptiere die Datenschutzerklärung';
+                    return;
+                }
+
+                if (hasError) return;
+
+                // Track submission attempt
+                trackEvent('lead_magnet_form_submitted', {
+                    location: form.closest('section').id,
+                    emailDomain: email.split('@')[1] // Privacy-safe tracking
+                });
+
+                // Show loading state
+                submitBtn.disabled = true;
+                btnText.style.display = 'none';
+                btnLoader.style.display = 'flex';
+
+                try {
+                    const response = await fetch('/api/linkedin-audit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email,
+                            linkedinUrl,
+                            consent,
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        // Success
+                        formMessage.className = 'form-message success';
+                        formMessage.textContent = '✓ ' + data.message + ' Schau auch im Spam-Ordner nach.';
+
+                        trackEvent('lead_magnet_success', {
+                            location: form.closest('section').id
+                        });
+
+                        // Reset form
+                        form.reset();
+                    } else {
+                        throw new Error(data.message || 'Ein Fehler ist aufgetreten');
+                    }
+                } catch (error) {
+                    // Error
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = '⚠️ ' + (error.message || 'Etwas ist schiefgelaufen. Bitte versuche es später erneut.');
+
+                    trackEvent('lead_magnet_error', {
+                        location: form.closest('section').id,
+                        error: error.message
+                    });
+                } finally {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnLoader.style.display = 'none';
+                }
+            });
+        })();
     </script>
 
 </body>

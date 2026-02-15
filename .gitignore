@@ -29,3 +29,10 @@ about-photo.jpg
 about-photo-v2.jpg
 Hi's Ultra Business (1).docx
 Posts-Team Posts.csv
+.vercel
+
+# Node.js
+node_modules/
+.env.local
+.env
+npm-debug.log
