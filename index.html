@@ -1903,61 +1903,88 @@
             .nav-links {
                 display: none;
                 position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: linear-gradient(160deg, #FFFAF3 0%, #FFF7EC 40%, #FFF3E0 100%);
+                inset: 0;
+                height: 100dvh;
+                height: 100vh;
+                width: 100vw;
+                background: #1A1A1A;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 0;
-                padding: 4rem 2rem 2rem;
-                z-index: 1000;
+                padding: 2rem;
+                z-index: 9999;
             }
 
             .nav-links.active {
                 display: flex;
-                animation: menuFadeIn 0.3s ease;
-            }
-
-            @keyframes menuFadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
             }
 
             .nav-links li {
                 width: 100%;
                 text-align: center;
+                opacity: 0;
+                transform: translateY(12px);
+                animation: menuItemIn 0.4s ease forwards;
+            }
+
+            .nav-links.active li:nth-child(1) { animation-delay: 0.05s; }
+            .nav-links.active li:nth-child(2) { animation-delay: 0.08s; }
+            .nav-links.active li:nth-child(3) { animation-delay: 0.11s; }
+            .nav-links.active li:nth-child(4) { animation-delay: 0.14s; }
+            .nav-links.active li:nth-child(5) { animation-delay: 0.17s; }
+            .nav-links.active li:nth-child(6) { animation-delay: 0.20s; }
+            .nav-links.active li:nth-child(7) { animation-delay: 0.23s; }
+            .nav-links.active li:nth-child(8) { animation-delay: 0.26s; }
+            .nav-links.active li:nth-child(9) { animation-delay: 0.30s; }
+
+            @keyframes menuItemIn {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
 
             .nav-links a {
-                font-size: 1rem;
-                color: #5A5A5A;
-                font-weight: 400;
-                letter-spacing: 0.03em;
+                font-size: 1.05rem;
+                color: rgba(255, 255, 255, 0.7);
+                font-weight: 300;
+                letter-spacing: 0.06em;
                 transition: color 0.3s ease;
                 display: block;
-                padding: 0.5rem 0;
+                padding: 0.55rem 0;
             }
 
-            .nav-links a:hover {
-                color: var(--gold-dark);
+            .nav-links a:hover,
+            .nav-links a:active {
+                color: var(--gold) !important;
+            }
+
+            .nav-links a::after {
+                display: none !important;
             }
 
             .nav-links li:last-child {
-                margin-top: 0.6rem;
+                margin-top: 1.2rem;
             }
 
             .nav-links .nav-cta {
-                background: var(--gold) !important;
-                color: #FFFFFF !important;
-                border: none !important;
-                padding: 0.75rem 2.5rem !important;
+                background: transparent !important;
+                color: var(--gold) !important;
+                border: 1px solid var(--gold) !important;
+                padding: 0.7rem 2.5rem !important;
                 font-size: 0.8rem !important;
-                box-shadow: 0 4px 15px rgba(237, 164, 54, 0.3);
+                letter-spacing: 0.12em !important;
+                box-shadow: none;
                 width: auto !important;
                 display: inline-block !important;
+                transition: all 0.3s ease !important;
+            }
+
+            .nav-links .nav-cta:hover,
+            .nav-links .nav-cta:active {
+                background: var(--gold) !important;
+                color: #1A1A1A !important;
             }
 
             .nav-toggle {
@@ -3707,24 +3734,38 @@
             navLinks.classList.toggle('active');
             const spans = navToggle.querySelectorAll('span');
             if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+                navToggle.style.zIndex = '10000';
+                spans.forEach(s => s.style.background = '#FFFFFF');
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
             } else {
+                document.body.style.overflow = '';
+                navToggle.style.zIndex = '';
+                spans.forEach(s => s.style.background = '');
                 spans[0].style.transform = '';
                 spans[1].style.opacity = '';
                 spans[2].style.transform = '';
             }
         });
 
+        // Helper to close mobile menu and reset styles
+        function closeMobileMenu() {
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+            navToggle.style.zIndex = '';
+            const spans = navToggle.querySelectorAll('span');
+            spans.forEach(s => s.style.background = '');
+            spans[0].style.transform = '';
+            spans[1].style.opacity = '';
+            spans[2].style.transform = '';
+        }
+
         // Close mobile menu on link click
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                const spans = navToggle.querySelectorAll('span');
-                spans[0].style.transform = '';
-                spans[1].style.opacity = '';
-                spans[2].style.transform = '';
+                closeMobileMenu();
             });
         });
 
@@ -3732,16 +3773,9 @@
         let lastScrollPosition = window.pageYOffset;
         window.addEventListener('scroll', () => {
             const currentScrollPosition = window.pageYOffset;
-
-            // Only close menu if user actually scrolled (not just smooth scroll from link click)
             if (Math.abs(currentScrollPosition - lastScrollPosition) > 10 && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                const spans = navToggle.querySelectorAll('span');
-                spans[0].style.transform = '';
-                spans[1].style.opacity = '';
-                spans[2].style.transform = '';
+                closeMobileMenu();
             }
-
             lastScrollPosition = currentScrollPosition;
         });
 
