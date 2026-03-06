@@ -1907,13 +1907,24 @@
                 height: 100dvh;
                 height: 100vh;
                 width: 100vw;
-                background: #1A1A1A;
+                background: #FFFFFF;
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
+                justify-content: flex-start;
+                align-items: stretch;
                 gap: 0;
-                padding: 2rem;
+                padding: 5rem 2rem 2rem;
                 z-index: 9999;
+                overflow-y: auto;
+            }
+
+            .nav-links::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
             }
 
             .nav-links.active {
@@ -1921,70 +1932,68 @@
             }
 
             .nav-links li {
-                width: 100%;
-                text-align: center;
+                text-align: left;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.06);
                 opacity: 0;
-                transform: translateY(12px);
-                animation: menuItemIn 0.4s ease forwards;
+                transform: translateX(-10px);
+                animation: menuItemIn 0.35s ease forwards;
             }
 
-            .nav-links.active li:nth-child(1) { animation-delay: 0.05s; }
-            .nav-links.active li:nth-child(2) { animation-delay: 0.08s; }
-            .nav-links.active li:nth-child(3) { animation-delay: 0.11s; }
-            .nav-links.active li:nth-child(4) { animation-delay: 0.14s; }
-            .nav-links.active li:nth-child(5) { animation-delay: 0.17s; }
-            .nav-links.active li:nth-child(6) { animation-delay: 0.20s; }
-            .nav-links.active li:nth-child(7) { animation-delay: 0.23s; }
-            .nav-links.active li:nth-child(8) { animation-delay: 0.26s; }
-            .nav-links.active li:nth-child(9) { animation-delay: 0.30s; }
+            .nav-links li:last-child {
+                border-bottom: none;
+                margin-top: 0.8rem;
+                text-align: center;
+            }
+
+            .nav-links.active li:nth-child(1) { animation-delay: 0.03s; }
+            .nav-links.active li:nth-child(2) { animation-delay: 0.06s; }
+            .nav-links.active li:nth-child(3) { animation-delay: 0.09s; }
+            .nav-links.active li:nth-child(4) { animation-delay: 0.12s; }
+            .nav-links.active li:nth-child(5) { animation-delay: 0.15s; }
+            .nav-links.active li:nth-child(6) { animation-delay: 0.18s; }
+            .nav-links.active li:nth-child(7) { animation-delay: 0.21s; }
+            .nav-links.active li:nth-child(8) { animation-delay: 0.24s; }
+            .nav-links.active li:nth-child(9) { animation-delay: 0.28s; }
 
             @keyframes menuItemIn {
                 to {
                     opacity: 1;
-                    transform: translateY(0);
+                    transform: translateX(0);
                 }
             }
 
             .nav-links a {
-                font-size: 1.05rem;
-                color: rgba(255, 255, 255, 0.7);
-                font-weight: 300;
-                letter-spacing: 0.06em;
+                font-size: 1rem;
+                color: #1A1A1A;
+                font-weight: 400;
+                letter-spacing: 0.01em;
                 transition: color 0.3s ease;
                 display: block;
-                padding: 0.55rem 0;
+                padding: 0.85rem 0;
             }
 
             .nav-links a:hover,
             .nav-links a:active {
-                color: var(--gold) !important;
+                color: var(--gold-dark) !important;
             }
 
             .nav-links a::after {
                 display: none !important;
             }
 
-            .nav-links li:last-child {
-                margin-top: 1.2rem;
-            }
-
             .nav-links .nav-cta {
-                background: transparent !important;
-                color: var(--gold) !important;
-                border: 1px solid var(--gold) !important;
-                padding: 0.7rem 2.5rem !important;
-                font-size: 0.8rem !important;
-                letter-spacing: 0.12em !important;
-                box-shadow: none;
-                width: auto !important;
-                display: inline-block !important;
-                transition: all 0.3s ease !important;
-            }
-
-            .nav-links .nav-cta:hover,
-            .nav-links .nav-cta:active {
                 background: var(--gold) !important;
-                color: #1A1A1A !important;
+                color: #FFFFFF !important;
+                border: none !important;
+                padding: 0.85rem 2.5rem !important;
+                font-size: 0.8rem !important;
+                letter-spacing: 0.1em !important;
+                border-radius: 50px !important;
+                box-shadow: 0 4px 15px rgba(237, 164, 54, 0.35);
+                width: 100% !important;
+                display: block !important;
+                text-align: center;
+                transition: all 0.3s ease !important;
             }
 
             .nav-toggle {
@@ -3736,7 +3745,7 @@
             if (navLinks.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
                 navToggle.style.zIndex = '10000';
-                spans.forEach(s => s.style.background = '#FFFFFF');
+                spans.forEach(s => s.style.background = '#1A1A1A');
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
