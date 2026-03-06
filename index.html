@@ -121,6 +121,10 @@
             align-items: center;
         }
 
+        .nav-mobile-logo {
+            display: none;
+        }
+
         .nav-links a {
             font-size: 0.85rem;
             font-weight: 400;
@@ -1931,6 +1935,18 @@
                 display: flex;
             }
 
+            .nav-mobile-logo {
+                display: list-item !important;
+                border-bottom: none !important;
+                padding-bottom: 1rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .nav-mobile-logo img {
+                height: 36px;
+                width: auto;
+            }
+
             .nav-links li {
                 text-align: left;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -1945,15 +1961,16 @@
                 text-align: center;
             }
 
-            .nav-links.active li:nth-child(1) { animation-delay: 0.03s; }
-            .nav-links.active li:nth-child(2) { animation-delay: 0.06s; }
-            .nav-links.active li:nth-child(3) { animation-delay: 0.09s; }
-            .nav-links.active li:nth-child(4) { animation-delay: 0.12s; }
-            .nav-links.active li:nth-child(5) { animation-delay: 0.15s; }
-            .nav-links.active li:nth-child(6) { animation-delay: 0.18s; }
-            .nav-links.active li:nth-child(7) { animation-delay: 0.21s; }
-            .nav-links.active li:nth-child(8) { animation-delay: 0.24s; }
-            .nav-links.active li:nth-child(9) { animation-delay: 0.28s; }
+            .nav-links.active li:nth-child(1) { animation-delay: 0.02s; }
+            .nav-links.active li:nth-child(2) { animation-delay: 0.05s; }
+            .nav-links.active li:nth-child(3) { animation-delay: 0.08s; }
+            .nav-links.active li:nth-child(4) { animation-delay: 0.11s; }
+            .nav-links.active li:nth-child(5) { animation-delay: 0.14s; }
+            .nav-links.active li:nth-child(6) { animation-delay: 0.17s; }
+            .nav-links.active li:nth-child(7) { animation-delay: 0.20s; }
+            .nav-links.active li:nth-child(8) { animation-delay: 0.23s; }
+            .nav-links.active li:nth-child(9) { animation-delay: 0.26s; }
+            .nav-links.active li:nth-child(10) { animation-delay: 0.30s; }
 
             @keyframes menuItemIn {
                 to {
@@ -2701,6 +2718,7 @@
             <img src="logo.png" alt="HI.GH Visibility">
         </a>
         <ul class="nav-links" id="navLinks">
+            <li class="nav-mobile-logo"><a href="#"><img src="logo.png" alt="HI.GH Visibility"></a></li>
             <li><a href="#about">Über mich</a></li>
             <li><a href="#philosophy">Ansatz</a></li>
             <li><a href="#lead-magnet-analysis">Gratis Analyse</a></li>
