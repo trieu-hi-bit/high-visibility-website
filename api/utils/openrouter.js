@@ -66,7 +66,7 @@ Format: Klare Absätze, **Fettdruck** für Kernaussagen. Nummerierte Listen nur 
                 'X-Title': 'HI.GH Visibility LinkedIn Analysis'
             },
             body: JSON.stringify({
-                model: 'anthropic/claude-3.5-sonnet',
+                model: 'anthropic/claude-sonnet-4',
                 messages: [
                     { role: 'system', content: systemPrompt },
                     { role: 'user', content: userPrompt }
